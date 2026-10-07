@@ -340,7 +340,6 @@
         </div>
         <div class="header-buttons">
             <a href="/">🏠 首页</a>
-            <a href="/archives">📚 全部文章</a>
             <a href="/about" style="margin-left: 15px;">关于本站</a>
             <a href="/contact">联系我</a>
             <a href="/login/" style="margin-left:15px;background-color:#f39c3d;color:#fff !important;border-color:#f39c3d;">🔐 登录</a>
@@ -674,14 +673,32 @@
     qita:{t:'#f59e0b',d:'#c47d07',s:'rgba(245,158,11,.16)'}
   };
   function applyTheme(k){ var x=themeMap[k]; if(!x||!panel)return; panel.style.setProperty('--theme',x.t); panel.style.setProperty('--theme-deep',x.d); panel.style.setProperty('--theme-soft',x.s); }
+  var termBody = document.getElementById('nh-term-body');
+  var tabsContainer = document.querySelector('.nh-term-tabs');
+  function repositionBody(){
+    if(window.innerWidth < 900){
+      var activeTab = document.querySelector('.nh-term-tab.active');
+      if(activeTab && openKey){
+        tabsContainer.insertBefore(termBody, activeTab.nextSibling);
+        termBody.style.gridColumn = '1 / -1';
+      }
+    } else {
+      if(termBody.parentNode !== panel || termBody.previousSibling !== tabsContainer){
+        panel.insertBefore(termBody, null);
+        termBody.style.gridColumn = '';
+      }
+    }
+  }
   function setOpen(k){
-    if(k===null||k===openKey){ openKey=null; tabs.forEach(function(t){t.classList.remove('active');}); panes.forEach(function(p){p.classList.remove('active');}); document.getElementById('nh-term-body').classList.remove('is-open'); return; }
+    if(k===null||k===openKey){ openKey=null; tabs.forEach(function(t){t.classList.remove('active');}); panes.forEach(function(p){p.classList.remove('active');}); termBody.classList.remove('is-open'); repositionBody(); return; }
     openKey=k;
     tabs.forEach(function(t){ t.classList.toggle('active', t.dataset.term===k); });
     panes.forEach(function(p){ p.classList.toggle('active', p.dataset.pane===k); });
-    document.getElementById('nh-term-body').classList.add('is-open');
+    termBody.classList.add('is-open');
     applyTheme(k);
+    repositionBody();
   }
+  window.addEventListener('resize', function(){ repositionBody(); });
   tabs.forEach(function(t){ t.addEventListener('click', function(){ setOpen(openKey===t.dataset.term?null:t.dataset.term); }); });
 
   // 去重
