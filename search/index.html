@@ -462,6 +462,7 @@
     var box = document.getElementById('nh-sp-list');
     document.getElementById('nh-sp-results').style.display = results.length ? 'block' : 'none';
     document.getElementById('nh-sp-empty').style.display = results.length ? 'none' : 'block';
+    document.getElementById('nh-sp-hot').style.display = keyword ? 'none' : '';
     document.getElementById('nh-sp-count').textContent = '找到 ' + results.length + ' 个相关课件' + (results.length>100?'（仅显示前 100 条）':'');
     if(results.length === 0){
       document.getElementById('nh-sp-empty-title').textContent = '没有找到“' + keyword + '”相关课件';

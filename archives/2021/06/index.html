@@ -418,12 +418,12 @@
   @keyframes nhfade{ from{opacity:0; transform:translateY(-8px);} to{opacity:1; transform:translateY(0);} }
   .nh-term-pane{ display:none; }
   .nh-term-pane.active{ display:block; animation:nhfade .26s ease; }
-  .nh-subject-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(116px,1fr)); gap:12px; }
+  .nh-subject-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:12px; }
   .nh-pill{ display:flex; align-items:center; gap:9px; padding:12px 14px; background:linear-gradient(180deg,#fff,#f1f4fa); border:1px solid var(--nh-line2); border-radius:9px; color:#42506a; font-size:.86rem; font-weight:700; text-decoration:none; box-shadow:0 3px 0 #dfe5ef, 0 6px 14px -10px rgba(30,42,59,.4); transition:all .16s; -webkit-tap-highlight-color:transparent; }
   .nh-pill:hover{ color:#fff; background:linear-gradient(180deg,var(--theme),var(--theme-deep)); border-color:var(--theme-deep); transform:translateY(-3px); box-shadow:0 5px 0 var(--theme-deep), 0 14px 24px -12px var(--theme); }
   .nh-pill:hover .nh-pill__icon{ background:rgba(255,255,255,.24); }
   .nh-pill__icon{ font-size:1.05rem; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; background:var(--theme-soft); border-radius:6px; }
-  .nh-pill__name{ flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .nh-pill__name{ flex:1; min-width:0; }
 
   /* 筛选栏（保留新 UI 原样） */
   .nh-filter-row{ display:flex; flex-wrap:wrap; gap:12px; padding:18px; background:linear-gradient(180deg,#fff,#f4f7fc); border:1px solid var(--nh-line); border-radius:var(--nh-radius); box-shadow:0 6px 22px -18px rgba(30,42,59,.3); }
