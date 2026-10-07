@@ -1,0 +1,1245 @@
+/* 全局重置 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f6f9; color: #333; line-height: 1.6; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* 顶部导航 */
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo h1 { font-size: 1.5rem; color: #2c3e50; }
+.header-buttons .btn {
+    display: inline-block;
+    margin-left: 15px;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+.header-buttons .btn:hover { background-color: #2980b9; }
+
+/* 主内容区域 */
+.main-content { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+
+/* 问题一：四个方框布局 */
+.class-section { margin-bottom: 3rem; }
+.section-title { text-align: center; margin-bottom: 1.5rem; font-size: 1.8rem; color: #2c3e50; }
+.class-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 默认四个一行 */
+    gap: 1.5rem;
+}
+
+/* 方框样式 - 增大尺寸 */
+.class-box {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    padding: 2.5rem 2rem; /* 从1.5rem增加到2.5rem，让方框更大 */
+    transition: transform 0.2s;
+    border-top: 6px solid #3498db; /* 边框加粗 */
+    min-height: 280px; /* 设置最小高度，确保足够大 */
+}
+.class-box:hover { transform: translateY(-5px); }
+.class-box h3 { 
+    text-align: center; 
+    margin-bottom: 1.5rem; /* 标题与列表间距增大 */
+    color: #2c3e50; 
+    border-bottom: 2px solid #eee; 
+    padding-bottom: 0.8rem; 
+    font-size: 1.4rem; /* 标题字体变大 */
+}
+
+
+/* 方框内的八个内容列表 - 改为两排（每排4个） */
+.subject-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4列布局，即两排 */
+    gap: 8px; /* 项目之间的间距 */
+}
+/* 方框内的八个内容列表 - 改为两排（每排4个），增大尺寸 */
+.subject-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4列布局，即两排 */
+    gap: 12px; /* 项目之间的间距从8px增加到12px */
+}
+.subject-list li {
+    margin-bottom: 0;
+}
+.subject-list a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 8px; /* 上下padding增加，让按钮更高 */
+    background-color: #ecf0f1;
+    border-radius: 6px;
+    color: #34495e;
+    font-size: 0.95rem; /* 字体稍微增大，从0.85rem到0.95rem */
+    font-weight: 500; /* 加粗一点，更好看 */
+    transition: all 0.2s;
+    white-space: nowrap; /* 防止文字换行 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 如果实在太长，显示省略号 */
+}
+.subject-list a:hover { 
+    background-color: #3498db; 
+    color: #fff; 
+}
+
+/* 手机端保持1列或2列，避免太挤 */
+@media (max-width: 600px) {
+    .subject-list {
+        grid-template-columns: repeat(2, 1fr); /* 手机端改为2列 */
+    }
+}
+
+
+/* 问题二：筛选按钮行 */
+.filter-section { margin-bottom: 2rem; }
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.filter-btn {
+    padding: 8px 20px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    color: #555;
+    font-weight: 500;
+}
+.filter-btn:hover, .filter-btn.active {
+    background-color: #e74c3c;
+    color: #fff;
+    border-color: #e74c3c;
+}
+
+/* 课件列表区域 */
+.post-list-section { margin-top: 3rem; }
+.list-title { margin-bottom: 1.5rem; font-size: 1.5rem; border-left: 5px solid #2ecc71; padding-left: 10px; }
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+.post-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.post-card a { text-decoration: none; color: #2c3e50; }
+.post-title { font-size: 1.1rem; margin-bottom: 1rem; font-weight: 600; }
+.post-card:hover .post-title { color: #3498db; }
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 10px;
+}
+
+/* 分页 */
+.pagination { text-align: center; margin-top: 2rem; }
+.pagination a, .pagination span {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.pagination .current { background-color: #3498db; color: #fff; border-color: #3498db; }
+
+/* 页脚 */
+.site-footer { text-align: center; padding: 2rem; margin-top: 3rem; background-color: #fff; color: #777; border-top: 1px solid #eee; }
+
+/* 响应式适配 */
+@media (max-width: 900px) {
+    .class-grid { 
+        grid-template-columns: repeat(2, 1fr); /* 两个一行 */
+        gap: 1.5rem;
+    }
+    .class-box {
+        padding: 2rem 1.5rem;
+        min-height: 240px;
+    }
+}
+@media (max-width: 600px) {
+    .class-grid { 
+        grid-template-columns: 1fr; /* 一个一行 */
+    }
+    .subject-list {
+        grid-template-columns: repeat(2, 1fr); /* 手机端2列 */
+        gap: 10px;
+    }
+    .subject-list a {
+        font-size: 0.9rem; /* 手机端字体稍小 */
+        padding: 10px 6px;
+    }
+    .header-buttons .btn { 
+        padding: 5px 10px; 
+        font-size: 0.8rem; 
+    }
+    .filter-bar { 
+        justify-content: flex-start; 
+        overflow-x: auto; 
+        white-space: nowrap; 
+    }
+}
+
+.empty-tip {
+    text-align: center;
+    padding: 3rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    color: #888;
+}
+.empty-tip p {
+    font-size: 1.1rem;
+}
+
+/* ========== 文章页面样式修复 ========== */
+
+/* 1. 强制加宽所有可能的文章内容容器（覆盖所有常见类名） */
+.post-content,
+.article-entry,
+.markdown-body,
+.content,
+#content,
+.post,
+article,
+main,
+.article,
+.post-body,
+.entry-content,
+.post-main,
+article.entry {
+    max-width: 1000px !important;
+    width: 100% !important;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 2. 确保父容器也是宽的（防止被外部限制） */
+.post,
+article.entry,
+.article-wrapper,
+.container.main-container {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* 3. 图片容器通用样式 */
+.img-container {
+    margin-bottom: 25px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 4. 单张全宽图片样式 (用于封面、文件结构树、教案) */
+.img-single {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+.img-single img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: block;
+    margin: 0 auto;
+}
+
+/* 5. 双列网格图片样式 (用于PPT除封面外的其他页面) */
+.img-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 20px 0;
+}
+.img-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+/* 6. 确保图片不会被其他样式覆盖 */
+.post-content img,
+.article-entry img,
+.markdown-body img,
+.content img,
+#content img,
+article img,
+main img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ========== 文章页面美化样式 (新增部分，添加在文件末尾) ========== */
+
+/* 文章头部样式 */
+.article-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.article-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.article-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 1rem;
+}
+
+.article-meta span {
+    background: rgba(255,255,255,0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* 分隔线 */
+.divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #667eea, transparent);
+    margin: 2rem 0;
+}
+
+/* 章节容器 */
+.section-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-left: 5px solid #667eea;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #ecf0f1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 文件结构部分 */
+.center {
+    text-align: center;
+}
+
+.rounded {
+    border-radius: 8px;
+}
+
+.shadow {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* 代码块样式 */
+.code-block {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    border-left: 4px solid #3498db;
+}
+
+/* PPT部分样式 */
+.ppt-section {
+    background: linear-gradient(to right, #f8f9fa, #fff);
+}
+
+.ppt-title {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin: 1.5rem 0 1rem;
+    padding: 0.8rem 1rem;
+    background: #e3f2fd;
+    border-radius: 6px;
+    border-left: 4px solid #2196f3;
+}
+
+.ppt-cover-container {
+    margin-bottom: 2rem;
+}
+
+.cover-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    background: #e8f5e9;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    color: #2e7d32;
+}
+
+.ppt-content-pages {
+    margin-top: 2rem;
+}
+
+.content-label {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+/* 双列网格容器 - 替换原有的.img-grid */
+.img-grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 1.5rem 0;
+}
+
+.grid-item {
+    position: relative;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.grid-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.page-number {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: #ff9800;
+    color: white;
+    padding: 0.2rem 0.8rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* 教案部分 */
+.teaching-section {
+    background: linear-gradient(to right, #fff9f9, #fff);
+}
+
+.teaching-plan {
+    background: #fffde7;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 4px solid #ffc107;
+    line-height: 1.8;
+}
+
+.material-item {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.material-title {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px dashed #dee2e6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 提示框样式 */
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.alert.warning {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+}
+
+.alert.info {
+    background: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+}
+
+/* 文章页脚 */
+.article-footer {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    border-radius: 10px;
+    margin-top: 2rem;
+}
+
+.footer-text {
+    color: #666;
+    line-height: 1.8;
+}
+
+/* 响应式调整 - 保持与原有响应式设计一致 */
+@media (max-width: 900px) {
+    .article-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .article-meta {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+    }
+    
+    .section-container {
+        padding: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .img-grid-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .class-box {
+        padding: 1.5rem;
+    }
+    
+    .article-header {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .article-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .section-container {
+        padding: 1rem;
+    }
+    
+    .article-meta span {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ========== 新增样式优化 ========== */
+
+/* 网格图组样式 */
+.grid-group {
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #ff9800;
+}
+
+.grid-label {
+    font-size: 1rem;
+    color: #e65100;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    background: #fff3e0;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* PPT网格图特殊样式 */
+.ppt-grid-image {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* 教案容器样式 */
+.teaching-plan-container {
+    margin-bottom: 2rem;
+}
+
+.teaching-plan-title {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4caf50;
+}
+
+.word-file-title {
+    font-size: 1.1rem;
+    color: #388e3c;
+    margin: 1.5rem 0 1rem;
+    padding: 0.8rem 1rem;
+    background: #e8f5e9;
+    border-radius: 6px;
+}
+
+.teaching-plan-page {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f1f8e9;
+    border-radius: 8px;
+    border: 1px solid #c5e1a5;
+}
+
+.page-label {
+    font-size: 0.9rem;
+    color: #689f38;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+/* 素材容器样式 */
+.material-container {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.material-title {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #9e9e9e;
+}
+
+.material-item {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.item-name {
+    font-size: 1.1rem;
+    color: #455a64;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed #cfd8dc;
+}
+
+/* 文章页脚 - 灰色居左样式 */
+.article-footer {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer-content {
+    text-align: left; /* 居左 */
+}
+
+.footer-text {
+    color: #666; /* 灰色 */
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+}
+
+.footer-time {
+    color: #888; /* 更浅的灰色 */
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* 水印位置调整提示（仅用于信息展示） */
+.watermark-note {
+    font-size: 0.8rem;
+    color: #999;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* 图片统一尺寸控制 */
+.img-container.img-single.center img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* PPT封面特殊样式 */
+.ppt-cover-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.cover-label {
+    font-size: 1rem;
+    color: #fff;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .grid-group {
+        padding: 1rem;
+    }
+    
+    .teaching-plan-page,
+    .material-item {
+        padding: 1rem;
+    }
+    
+    .article-footer {
+        margin-top: 2rem;
+        padding: 1rem 0;
+    }
+    
+    .footer-text {
+        font-size: 0.95rem;
+    }
+    
+    .footer-time {
+        font-size: 0.85rem;
+    }
+}
+
+/* ========== 文章页面样式优化 ========== */
+
+/* 文章头部样式 */
+.article-header {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.article-date {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.article-views {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.article-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.article-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.article-meta span {
+    background: #f8f9fa;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.article-meta .subject {
+    background: #e8f5e9;
+    border-color: #c8e6c9;
+    color: #2e7d32;
+}
+
+.article-meta .age {
+    background: #e3f2fd;
+    border-color: #bbdefb;
+    color: #1565c0;
+}
+
+.article-meta .views {
+    background: #fff3e0;
+    border-color: #ffe0b2;
+    color: #ef6c00;
+}
+
+/* 分隔线 */
+.divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #667eea, transparent);
+    margin: 2rem 0;
+}
+
+/* 章节容器 */
+.section-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-left: 5px solid #667eea;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #ecf0f1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 缩略图部分 */
+.thumbnail-section {
+    background: linear-gradient(to right, #f8f9fa, #fff);
+}
+
+/* PPT整体缩览图 */
+.ppt-thumbnail-container {
+    text-align: center;
+}
+
+/* 图片容器 */
+.img-container {
+    margin-bottom: 25px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.img-single {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+.center {
+    text-align: center;
+}
+
+.rounded {
+    border-radius: 8px;
+}
+
+.shadow {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* PPT部分 */
+.ppt-section {
+    background: linear-gradient(to right, #f8f9fa, #fff);
+}
+
+.ppt-title {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin: 1.5rem 0 1rem;
+    padding: 0.8rem 1rem;
+    background: #e3f2fd;
+    border-radius: 6px;
+    border-left: 4px solid #2196f3;
+}
+
+.ppt-cover-container {
+    margin-bottom: 2rem;
+}
+
+.cover-label {
+    font-size: 1rem;
+    color: #fff;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.ppt-content-pages {
+    margin-top: 2rem;
+}
+
+.content-label {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.grid-group {
+    margin-bottom: 2rem;
+}
+
+/* 教案部分 */
+.teaching-section {
+    background: linear-gradient(to right, #fff9f9, #fff);
+}
+
+.word-file-container {
+    margin-bottom: 2rem;
+}
+
+.word-title {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    background: #e8f5e9;
+    border-radius: 6px;
+    border-left: 4px solid #4CAF50;
+}
+
+/* 下载有效期说明 */
+.download-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 10px;
+    border-left: 5px solid #3498db;
+}
+
+.download-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e0e0e0;
+    text-align: left;
+}
+
+.download-table {
+    overflow-x: auto;
+}
+
+.validity-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.validity-table th {
+    background: #3498db;
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-weight: 600;
+}
+
+.validity-table td {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    background: white;
+    color: #555;
+    text-align: left;
+}
+
+.validity-table tr:nth-child(even) td {
+    background: #f8f9fa;
+}
+
+.validity-table tr:hover td {
+    background: #f0f7ff;
+}
+
+.validity-table strong {
+    color: #2c3e50;
+}
+
+/* 提示框样式 */
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.alert.warning {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+}
+
+.alert.info {
+    background: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+}
+
+/* 确保图片不会超出 */
+.post-content img,
+.article-entry img,
+.markdown-body img,
+.content img,
+#content img,
+article img,
+main img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .article-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .article-meta {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+    }
+    
+    .section-container {
+        padding: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .download-section {
+        padding: 1rem;
+    }
+    
+    .validity-table {
+        font-size: 0.85rem;
+    }
+    
+    .validity-table th,
+    .validity-table td {
+        padding: 0.8rem 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-header {
+        padding: 1.5rem;
+    }
+    
+    .article-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .section-container {
+        padding: 1rem;
+    }
+    
+    .article-meta span {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .cover-label {
+        font-size: 0.9rem;
+        padding: 0.4rem 1rem;
+    }
+}
+
+/* ================================================================
+   统一状态组件（暂无数据 / 加载中 / 出错 / 404）
+   说明：这是全站唯一的状态样式来源。
+   页面里的 JS 通过 _partial/ui.ejs 中的 renderState() 函数
+   自动生成下面这些结构，你只需维护这里的样式即可。
+   结构：<div class="state-block"> 图标/spinner + h3 + p + 按钮 </div>
+   ================================================================ */
+.state-block {
+    grid-column: 1 / -1;              /* 在卡片网格里占满一整行 */
+    text-align: center;
+    padding: 60px 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    color: #999;
+}
+
+.state-block .state-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+.state-block h3 {
+    color: #666;
+    margin-bottom: 8px;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.state-block p {
+    color: #999;
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+}
+
+/* 状态里的操作按钮 */
+.state-block .state-btn {
+    display: inline-block;
+    padding: 9px 26px;
+    background: #3498db;
+    color: #fff;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.state-block .state-btn:hover {
+    background: #2980b9;
+}
+
+/* 两个按钮并排时的间距（404 页用） */
+.state-block .state-btn + .state-btn {
+    margin-left: 10px;
+}
+
+/* 加载中转圈动画 */
+.state-block .spinner {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 14px;
+    border: 4px solid #e3e8ee;
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: state-spin 0.8s linear infinite;
+}
+
+@keyframes state-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 404 特大数字 */
+.state-block.state-404 .state-code {
+    display: block;
+    font-size: 5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    line-height: 1.1;
+    margin-bottom: 8px;
+}
+
+.state-block.state-404 h3 {
+    font-size: 1.4rem;
+}
+
+
+/* ============================================================
+   🌟 移动端优化补丁 E（仅手机端生效，桌面端不受影响）
+   ============================================================ */
+
+/* ---- 回到顶部按钮（由 layout.ejs 补丁 B 的 JS 动态创建） ---- */
+.yekjw-backtop {
+    position: fixed;
+    right: 16px;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px)); /* 避开 iOS 底部小横条 */
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: #2c3e50;
+    color: #fff;
+    font-size: 1.25rem;
+    line-height: 44px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 9998;
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    -webkit-tap-highlight-color: transparent;
+    padding: 0;
+}
+.yekjw-backtop.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.yekjw-backtop:active { background: #3498db; }
+
+/* 桌面端隐藏回到顶部按钮（铁律：不改桌面端） */
+@media (min-width: 769px) {
+    .yekjw-backtop { display: none !important; }
+}
+
+/* ---- 手机端：正文容器消掉 20px 左右内边距（配合补丁 C） ---- */
+@media (max-width: 768px) {
+    article,
+    .post-content,
+    .article-entry,
+    .markdown-body,
+    .content,
+    #content,
+    .post,
+    .post-body,
+    .entry-content,
+    .post-main,
+    .article-content {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .container { padding-left: 10px !important; padding-right: 10px !important; }
+}

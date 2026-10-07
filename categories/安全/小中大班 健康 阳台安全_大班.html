@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小中大班 健康 阳台安全 - 搜课件网</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* 主体内容 */
+        body { 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            background-color: #f4f6f8; 
+            color: #333; 
+            margin: 0; 
+            padding: 0; 
+            padding-top: 110px; /* 顶部留空，防止被固定头部遮挡 */
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        /* 顶部导航 - 🔥 强制蓝色背景 */
+        .site-header { 
+            background-color: #2c3e50 !important; /* 强制深蓝色 */
+            color: #fff !important;              /* 强制白色文字 */
+            padding: 10px 0; 
+            margin-bottom: 30px;
+            position: fixed;      
+            top: 0;
+            left: 0;
+            width: 100%;          
+            z-index: 9999;         /* 强制最高层级 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+        
+        .header-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* 标题样式 */
+        .logo { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+        .logo a { 
+            color: #fff !important;  /* 强制白色 */
+            text-decoration: none; 
+            font-size: 1.8rem; 
+            font-weight: bold; 
+        }
+        .site-slogan {
+            font-size: 0.9rem;       
+            color: #bdc3c7;          
+            margin-top: 2px;          
+            margin-left: 2px;         
+            font-weight: normal;
+        }
+
+        /* 按钮样式 */
+        .header-buttons a { 
+            color: #ecf0f1 !important; /* 强制浅灰白 */
+            text-decoration: none; 
+            margin-left: 20px; 
+            font-size: 0.9rem; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            padding: 5px 12px; 
+            border-radius: 4px; 
+        }
+
+        /* 搜索按钮 */
+        .header-buttons .search-btn {
+            background-color: #3498db !important;
+            color: #fff !important;
+        }
+        .header-buttons .search-btn:hover {
+            background-color: #2980b9 !important;
+        }
+
+
+        /* 🌟 顶部四个班级课程卡片（参考图设计：彩色大圆角卡片 + 半透明胶囊子标签） */
+        .top-boxes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-bottom: 40px; }
+        .big-box {
+            position: relative;
+            border-radius: 20px;
+            padding: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(44, 62, 80, 0.18);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .big-box:hover { transform: translateY(-5px); box-shadow: 0 18px 32px -8px rgba(44, 62, 80, 0.3); }
+        .big-box:active { transform: translateY(-1px); }
+        /* 四张卡片各自的配色：小班橙 / 中班青 / 大班蓝 / 其他紫 */
+        .course-xiaoban  { background: linear-gradient(135deg, #ffb199 0%, #ff8f70 100%); }
+        .course-zhongban { background: linear-gradient(135deg, #5fc9bd 0%, #35b3a4 100%); }
+        .course-daban    { background: linear-gradient(135deg, #7ec3f8 0%, #55a8f0 100%); }
+        .course-qita     { background: linear-gradient(135deg, #b39ddb 0%, #9575cd 100%); }
+        /* 卡片右上角大号半透明装饰 emoji（模仿参考图卡片里的大图标） */
+        .course-deco {
+            position: absolute;
+            right: -8px;
+            top: -12px;
+            font-size: 5rem;
+            line-height: 1;
+            opacity: 0.22;
+            pointer-events: none;
+            user-select: none;
+            filter: saturate(1.2);
+        }
+        /* 卡片头部：emoji 图标块 + 标题 + 副标题 */
+        .box-head { display: flex; align-items: center; gap: 13px; margin-bottom: 16px; position: relative; z-index: 1; }
+        .box-emoji {
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 14px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+        }
+        .box-title { font-size: 1.35rem; font-weight: bold; color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); }
+        .box-sub { font-size: 0.82rem; color: rgba(255, 255, 255, 0.92); margin-top: 3px; }
+        /* 子分类：半透明白色胶囊标签（毛玻璃质感） */
+        .box-content { display: flex; flex-wrap: wrap; gap: 9px; position: relative; z-index: 1; }
+        .box-link {
+            text-decoration: none;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            padding: 8px 15px;
+            border-radius: 999px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .box-link:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
+        }
+        .box-link:active { transform: translateY(0); background: rgba(255, 255, 255, 0.42); }
+
+        /* 筛选按钮行 */
+        .filter-section { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 30px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
+        .filter-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .filter-btn { padding: 8px 20px; background: #ecf0f1; border: none; border-radius: 20px; cursor: pointer; font-size: 1rem; color: #555; transition: 0.3s; }
+        .filter-btn:hover { background: #bdc3c7; }
+        .filter-btn.active { background: #e67e22; color: #fff; font-weight: bold; box-shadow: 0 4px 6px rgba(230, 126, 34, 0.3); }
+
+        /* 底部动态课件列表 */
+        .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 0 10px; }
+        .list-title { margin: 0; color: #2c3e50; }
+        
+        .posts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media (max-width: 1024px) { .posts-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 768px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .post-card { background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; transition: 0.2s; display: flex; flex-direction: column; }
+        .post-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        
+        /* 图片区域样式 */
+        .card-img-wrapper { width: 100%; height: 180px; overflow: hidden; background: #f9f9f9; display: flex; align-items: center; justify-content: center; }
+        .card-img-wrapper img { width: 100%; height: auto; max-height: 180px; object-fit: contain; transition: transform 0.5s; }
+        .post-card:hover .card-img-wrapper img { transform: scale(1.1); }
+
+        .card-body { padding: 15px; flex: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1rem; font-weight: bold; margin-bottom: 10px; color: #2c3e50; line-height: 1.4; flex: 1; }
+        .card-title a { text-decoration: none; color: inherit; }
+        .card-meta { font-size: 0.8rem; color: #999; margin-top: auto; display: flex; justify-content: space-between; }
+        
+        /* 分页 */
+        .pagination { margin-top: 30px; text-align: center; }
+        .page-btn { padding: 10px 20px; background: #34495e; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; margin: 0 10px; }
+        .page-btn:disabled { background: #ccc; cursor: not-allowed; }
+        .page-info { font-size: 1rem; margin: 0 15px; color: #555; vertical-align: middle; }
+
+        /* 广告轮播图样式 */
+        .ad-slider-container {
+            position: relative;
+            margin-top: -30px;  /* 🌟 向上拉回 */
+            margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: 100%; 
+        }
+        .ad-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain; 
+        }
+        .ad-slide { display: none; width: 100%; }
+        .fade { animation-name: fade; animation-duration: 1.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+
+        /* 手机端优化 */
+        @media (max-width: 768px) {
+            .header-content { padding: 0 10px; }
+            .header-buttons a { margin-top: 10px !important; font-size: 0.8rem; padding: 4px 8px; margin-left: 8px; white-space: nowrap; }
+            .ad-slider-container { margin-top: 10px !important; /* 🌟 改成 10px，继续往下调整 */border-radius: 0; margin-left: -20px; margin-right: -20px; width: calc(100% + 40px); }
+            .ad-img { height: auto !important; width: 100%; }
+            .top-boxes-grid { grid-template-columns: 1fr; gap: 15px; }
+            .big-box { padding: 18px; }
+            .box-emoji { width: 44px; height: 44px; font-size: 1.4rem; border-radius: 12px; }
+            .box-title { font-size: 1.15rem; }
+            .box-sub { font-size: 0.76rem; }
+            .course-deco { font-size: 4rem; }
+            .box-content { gap: 8px; }
+            .box-link {
+                flex: 1 1 calc(50% - 4px);          /* 手机端一行两个，铺满宽度更好按 */
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                min-height: 44px;                   /* 44px 触摸标准 */
+                padding: 8px 6px;
+                font-size: 0.88rem;
+                box-sizing: border-box;
+            }
+            .filter-section { padding: 15px; text-align: left; overflow-x: auto; white-space: nowrap; }
+            .filter-bar { display: flex; gap: 8px; width: max-content; }
+            .posts-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .card-img-wrapper { height: 140px; }
+        }
+        @media (max-width: 480px) {
+            .card-title { font-size: 0.85rem; }
+            .card-img-wrapper { height: 120px; }
+        }
+
+        /* ========== 🌟 全局强力调整页面间距 (修正位置：移到了 style 标签里面) ========== */
+
+        /* 1. 修复首页筛选后的列表位置（大中小班分类列表） */
+        .list-header {
+            margin-top: 0 !important; /* 🔥 加大到 120px，强行推下去 */
+        }
+
+        /* 2. 修复“点击查看更多资源”页面的位置（这是一个独立页面） */
+        .page-title, 
+        h1, 
+        .archive-title {
+            margin-top: 100px !important; /* 🔥 针对资源页和文章页的标题增加上边距 */
+            display: block;
+        }
+
+        /* 3. 保险起见，给资源页的主要内容区也增加一点距离 */
+        .page-content,
+        .article-content {
+            margin-top: 50px !important;
+        }
+            /* ========== 🌟 强制页脚居中样式 (新增) ========== */
+    .site-footer {
+        width: 100%; /* 确保占满全屏宽度 */
+        text-align: center; /* 🌟 核心：强制内部所有文字和元素居中 */
+        background-color: #2c3e50; /* 深蓝背景 */
+        color: #ecf0f1; /* 浅灰文字 */
+        padding: 40px 0; /* 上下留白 */
+        margin-top: 60px; /* 距离上方内容 */
+        display: block; /* 确保是块级显示 */
+        border-top: 3px solid #3498db; /* 顶部蓝线 */
+    }
+
+    .footer-content {
+        max-width: 1200px; /* 内容最大宽度 */
+        margin: 0 auto; /* 🌟 核心：确保内容块在屏幕中间 */
+        padding: 0 20px; /* 左右留空 */
+    }
+
+    /* 链接样式 */
+    .footer-content a {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .footer-content a:hover {
+        color: #5dade2;
+        text-decoration: underline;
+    }
+
+    /* 手机端适配 */
+    @media (max-width: 768px) {
+        .site-footer { padding: 30px 0; }
+    }
+    /* 运行时间样式 */
+.site-runtime-container {
+    text-align: left; /* 左对齐 */
+    font-size: 0.9rem;   /* 字体大小 */
+    color: #bdc3c7;      /* 浅灰白色 */
+    margin: 5px 0;       /* 上下间距 */
+}
+.runtime-icon { margin-right: 5px; }
+
+        /* ============================================================
+           🌟 移动端优化补丁 A（仅手机端生效，桌面端不受影响）
+           ============================================================ */
+        @media (max-width: 768px) {
+            /* ---- 1. 顶栏统一：按钮改为 flex 流式排布，间距一致，不再东挤西挤 ---- */
+            .header-content {
+                flex-wrap: wrap;
+                row-gap: 8px;
+                padding: 0 12px;
+            }
+            .logo a { font-size: 1.3rem; }
+            .site-slogan { font-size: 0.75rem; }
+            .header-buttons {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 6px;
+                width: 100%;
+                margin-left: 0;
+            }
+            .header-buttons a {
+                margin: 0 !important;          /* 覆盖 margin-left:20px / 15px / 8px */
+                margin-top: 0 !important;      /* 覆盖旧规则的 10px 顶推 */
+                font-size: 0.82rem;
+                padding: 7px 10px;
+                white-space: nowrap;
+            }
+
+            /* ---- 2. 收敛第 153~172 行的全局顶推（手机端首屏不再空 150px） ---- */
+            h1, .page-title, .archive-title { margin-top: 8px !important; }
+            .page-content, .article-content { margin-top: 0 !important; }
+
+            /* ---- 3. 通用触控目标 ≥ 44px（分页按钮） ---- */
+            .page-btn { min-height: 44px; box-sizing: border-box; }
+        }
+        @media (max-width: 480px) {
+            .header-buttons a { font-size: 0.78rem; padding: 6px 8px; }
+            .header-buttons { gap: 5px; }
+        }
+    </style>
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+    <!-- 调用头部 -->
+    <header class="site-header">
+    <div class="header-content">
+        <div class="logo">
+            <a href="/">搜课件网</a>
+            <span class="site-slogan">专业、系统、有趣的教学资源</span>
+        </div>
+        <div class="header-buttons">
+            <a href="/">🏠 首页</a>
+            <a href="/archives">📚 全部文章</a>
+            <a href="/about" style="margin-left: 15px;">关于本站</a>
+            <a href="/contact">联系我</a>
+            <a href="/login/" style="margin-left:15px;background-color:#f39c3d;color:#fff !important;border-color:#f39c3d;">🔐 登录</a>
+        </div>
+    </div>
+</header>
+
+
+    <!-- 页面内容 -->
+    <div class="container">
+        <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小中大班 健康 阳台安全 - 搜课件网</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* ========== 全局基础样式 ========== */
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f6f8; color: #333; margin: 0; }
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+
+        /* 文章卡片样式 */
+        .post-card { background: #fff; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        
+        /* 标题和元数据 */
+        .post-title { text-align: center; font-size: 2.2rem; color: #2c3e50; margin-bottom: 10px; }
+        .post-meta { text-align: center; color: #95a5a6; font-size: 0.9rem; margin-bottom: 30px; }
+
+        /* 封面图样式 */
+        .post-cover { width: 100%; height: auto; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: block; object-fit: contain; }
+
+        /* ========== 🌟 终极修复：解决 h1 标题距离上方过远的问题 ========== */
+
+        /* 1. 关键修复：强制取消 layout.ejs 中 h1 的 100px 上边距 */
+        /* 这个规则会覆盖全局样式，只影响文章卡片内的 h1 */
+        .post-card h1 {
+            margin-top: 0 !important;     /* 🔥 强制覆盖 layout.ejs 的 100px */
+            margin-bottom: 15px !important; /* 标题下方的间距 */
+        }
+
+        /* 2. 微调：减小日期/浏览量的底部边距 */
+        .post-card .post-meta {
+            margin-bottom: 15px !important;
+        }
+
+        /* 3. 紧凑内容区域 */
+        .post-card .article-content {
+            margin-top: 5px !important; /* 进一步缩小，因为 h1 已经处理好了 */
+        }
+
+        /* 4. 针对 ceshi7.py 生成的 article-header */
+        .article-header {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* 5. 调整分隔线 */
+        .divider {
+            margin: 10px 0 !important;
+        }
+
+        /* ========== 🌟 核心修复一：文章宽度加宽 (1300px) ========== */
+        article, .post-content, .article-entry, .markdown-body, 
+        #content, .content, main, .entry-content, .post, .post-main, .article, .article-wrapper,
+        .container.main-container {
+            max-width: 1300px !important;
+            width: 100% !important;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* 确保图片正常显示 */
+        article img, .post-content img, .article-entry img, 
+        .markdown-body img, #content img, .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 底部导航区域样式 */
+        .article-footer { margin-top: 40px; padding-top: 30px; border-top: 1px dashed #e8e8e8; text-align: center; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .article-footer .btn { display: inline-block; min-width: 150px; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-size: 1rem; font-weight: 500; transition: all 0.3s ease; }
+        .btn-back { background-color: #e6f7ff; color: #0050b3; border: 1px solid #91d5ff; }
+        .btn-back:hover { background-color: #bae7ff; color: #003a8c; border-color: #40a9ff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(24, 144, 255, 0.2); }
+        .btn-home { background-color: #fff7e6; color: #d46b08; border: 1px solid #ffd591; }
+        .btn-home:hover { background-color: #ffe7ba; color: #ad4e00; border-color: #ffa940; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(250, 219, 20, 0.2); }
+
+        /* ========== 相关推荐样式 ========== */
+        .related-box { margin-top: 40px; padding-top: 30px; border-top: 1px solid #f0f0f0; }
+        .related-title { font-size: 1.2rem; color: #2c3e50; margin-bottom: 18px; font-weight: bold; }
+        .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .related-item { background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; transition: 0.2s; }
+        .related-item:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform: translateY(-2px); }
+        .related-thumb { width: 100%; height: 120px; overflow: hidden; background: #f9f9f9; display: flex; align-items: center; justify-content: center; }
+        .related-thumb img { width: 100%; height: auto; max-height: 120px; object-fit: contain; }
+        .related-body { padding: 10px 12px; }
+        .related-body a {
+            font-size: 0.9rem; font-weight: bold; color: #2c3e50; line-height: 1.4;
+            text-decoration: none; overflow: hidden; display: -webkit-box;
+            -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+        }
+        .related-body a:hover { color: #1890ff; }
+
+            /* ========== 手机端内容区域加宽 ========== */
+    @media (max-width: 768px) {
+        /* 🌟 文章卡片内边距缩小：从 40px 减小到 10px，内容瞬间变宽 */
+        .post-card {
+            padding: 20px 10px !important;
+        }
+        /* 手机端相关推荐改为 2 列，避免太窄 */
+        .related-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+    }
+
+        /* ============================================================
+           🌟 移动端优化补丁 C（仅手机端生效，桌面端不受影响）
+           ============================================================ */
+        @media (max-width: 768px) {
+            /* ---- 1. 正文占宽：逐层消除左右留白 ---- */
+            .container { padding: 0 10px !important; margin: 16px auto !important; }
+            .post-card { padding: 16px 8px !important; }
+            /* 消掉 style.css 第 219~237 行加的 20px 内边距（选择器一一对应） */
+            .post-card article, .post-card .post-content, .post-card .article-entry,
+            .post-card .markdown-body, .post-card .content, .post-card #content,
+            .post-card .post, .post-card .post-body, .post-card .entry-content,
+            .post-card .post-main, .post-card .article-content, .post-card .article-header {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                max-width: 100% !important;
+            }
+
+            /* ---- 2. 标题与元信息收敛 ---- */
+            .post-title { font-size: 1.45rem; line-height: 1.45; }
+            .post-meta { margin-bottom: 14px !important; }
+            .post-cover { margin-bottom: 16px; }
+
+            /* ---- 3. 页脚按钮（只改间距字号，不动结构） ---- */
+            .article-footer { margin-top: 24px; padding-top: 18px; }
+            .article-footer .btn { min-width: 120px; padding: 10px 14px; font-size: 0.9rem; }
+
+            /* ---- 4. 相关推荐：强制 2 列（问题 7 兜底） ---- */
+            .related-box { margin-top: 24px; padding-top: 18px; }
+            .related-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+            .related-body { padding: 8px; }
+
+            /* ---- 5. 正文里的图片/表格不撑破屏幕，表格可横向滑动 ---- */
+            .article-content img, .article-content video,
+            .article-content table, .post-content table { max-width: 100% !important; }
+            .article-content table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="post-card">
+            <h1 class="post-title">小中大班 健康 阳台安全</h1>
+            
+            <!-- 封面图显示区域 -->
+            
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/小中大班_健康_阳台安全/ppt/20260131124602_ppt_cover_wm.jpg" alt="封面图" class="post-cover">
+                </div>
+            
+            
+            <div class="post-meta">
+                <span>📅 2020-07-21</span>
+                <span style="margin: 0 10px;">|</span>
+                <span>👁 17346 次浏览</span>
+            </div>
+
+            <!-- 🌟 正文内容区域 -->
+            <div class="article-content">
+                
+
+                <div class="article-header">
+
+<h1>小中大班 健康 阳台安全</h1>
+
+<div class="article-meta">
+
+<p><span class="subject">📚 科目：安全</span></p>
+<p><span class="age">👶 年龄：大班</span></p>
+<p><span class="views">🔥 热度：17346</span></p>
+</div>
+
+</div>
+
+
+<hr class="divider">
+
+
+<div class="section-container">
+
+<div class="section-title">📂 课件完整文件结构</div>
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/小中大班_健康_阳台安全/tree/20260131124558_folder_tree.jpg" alt="文件结构图" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+<div class="section-container thumbnail-section">
+
+<div class="section-title">📊 PPT整体缩览图</div>
+
+<div class="ppt-title">📄 小中大班_健康_阳台安全_课件.pptx</div>
+
+<div class="ppt-thumbnail-container">
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/小中大班_健康_阳台安全/ppt_thumbnail/20260131124602_ppt_thumbnail.jpg" alt="PPT整体缩览图" class="rounded shadow">
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-container ppt-section">
+
+<div class="section-title">📽️ PPT课件预览</div>
+
+<div class="ppt-cover-container">
+
+<div class="cover-label">🎨 PPT封面页</div>
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/小中大班_健康_阳台安全/ppt/20260131124602_ppt_cover_wm.jpg" alt="PPT封面" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+<div class="ppt-content-pages">
+
+<div class="content-label">📑 PPT内容页</div>
+
+<div class="grid-group">
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/小中大班_健康_阳台安全/ppt_grid/20260131124604_ppt_grid_1.jpg" alt="第2-11页" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+<div class="grid-group">
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/小中大班_健康_阳台安全/ppt_grid/20260131124604_ppt_grid_2.jpg" alt="第12-14页" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="section-container teaching-section">
+
+<div class="section-title">📝 教案与发言稿</div>
+
+<div class="word-file-container">
+
+<div class="word-title">📄 小中大班_健康_阳台安全_教案.doc（共3页）</div>
+
+<div class="teaching-plan-page">
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/小中大班_健康_阳台安全/teaching_plan/20260131124604_教案_01.jpg" alt="教案内容" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+<div class="teaching-plan-page">
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/小中大班_健康_阳台安全/teaching_plan/20260131124604_教案_02.jpg" alt="教案内容" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+<div class="teaching-plan-page">
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/小中大班_健康_阳台安全/teaching_plan/20260131124604_教案_03.jpg" alt="教案内容" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- 🌟 购买 / VIP 说明区块 -->
+            <!-- ======================================================= -->
+            <style>
+                .buy-box{ margin-top:36px; border-radius:14px; overflow:hidden; border:1px solid #e2e8f2; background:linear-gradient(180deg,#fff,#f6f8ff); box-shadow:0 8px 24px -16px rgba(79,70,229,.4); }
+                .buy-box__head{ padding:20px 24px; background:linear-gradient(135deg,#6c63ff,#4f46e5); color:#fff; }
+                .buy-box__head h3{ margin:0 0 6px; font-size:1.2rem; font-weight:800; }
+                .buy-box__head p{ margin:0; font-size:.88rem; opacity:.9; }
+                .buy-box__body{ padding:22px 24px; }
+                .buy-table{ width:100%; border-collapse:collapse; margin-bottom:20px; font-size:.9rem; }
+                .buy-table th{ background:#eef1ff; color:#3a2fc7; font-weight:800; padding:10px 12px; text-align:left; border:1px solid #dde3fd; }
+                .buy-table td{ padding:10px 12px; border:1px solid #e8ecf4; color:#42506a; }
+                .buy-table tr:hover td{ background:#f6f8ff; }
+                .buy-table .price{ font-weight:800; color:#e67e22; }
+                .buy-table .hl{ background:#fff7e6; }
+                .buy-btns{ display:flex; gap:14px; flex-wrap:wrap; }
+                .buy-btn{ flex:1; min-width:180px; padding:14px 20px; border-radius:10px; text-align:center; text-decoration:none; font-weight:800; font-size:.95rem; transition:transform .15s, box-shadow .15s; }
+                .buy-btn--vip{ color:#fff; background:linear-gradient(180deg,#f39c3d,#e67e22); box-shadow:0 4px 0 #b35c10, 0 10px 20px -10px rgba(230,126,34,.6); }
+                .buy-btn--single{ color:#fff; background:linear-gradient(180deg,#6c63ff,#4f46e5); box-shadow:0 4px 0 #3a2fc7, 0 10px 20px -10px rgba(79,70,229,.6); }
+                .buy-btn:hover{ transform:translateY(-2px); filter:brightness(1.06); }
+                .buy-btn:active{ transform:translateY(2px); box-shadow:0 1px 0 rgba(0,0,0,.3); }
+                .buy-note{ margin-top:16px; font-size:.8rem; color:#93a1b3; line-height:1.7; }
+                .buy-copy{ display:inline-flex; align-items:center; gap:6px; margin-top:10px; padding:8px 16px; font-size:.82rem; font-weight:700; color:#4f46e5; background:#eef1ff; border:1px solid #dde3fd; border-radius:8px; cursor:pointer; transition:all .15s; }
+                .buy-copy:hover{ background:#e6eaff; border-color:#b3bde9; }
+                @media (max-width:768px){
+                    .buy-box__body{ padding:16px 14px; }
+                    .buy-table{ font-size:.78rem; }
+                    .buy-table th, .buy-table td{ padding:8px 6px; }
+                    .buy-btns{ flex-direction:column; }
+                }
+            </style>
+            <div class="buy-box">
+                <div class="buy-box__head">
+                    <h3>📥 获取本课完整资源</h3>
+                    <p>包含高清PPT课件 + 详细教案 + 配套素材</p>
+                </div>
+                <div class="buy-box__body">
+                    <table class="buy-table">
+                        <thead>
+                            <tr><th>档位</th><th>时长</th><th>权益</th><th>价格</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>体验卡</td><td>7 天</td><td>全部栏目 + 10 次下载</td><td class="price">9.9 元</td></tr>
+                            <tr><td>月卡</td><td>30 天</td><td>全部栏目 + 50 次</td><td class="price">29.9 元</td></tr>
+                            <tr><td>年卡</td><td>365 天</td><td>全部栏目 + 300 次</td><td class="price">59.9 元</td></tr>
+                            <tr class="hl"><td>终身卡</td><td>终身</td><td>无限次下载 / 每日限 8 次</td><td class="price">199 元</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="buy-btns">
+                        <a href="/vip-member/" class="buy-btn buy-btn--vip">👑 开通VIP会员（全站免费）</a>
+                        <a href="javascript:void(0)" onclick="openModal()" class="buy-btn buy-btn--single">🛒 单篇购买（4.99元）</a>
+                    </div>
+                    <p class="buy-note">* VIP会员永久免下载券，单次购买永久有效</p>
+                    <div class="buy-copy" onclick="var u=location.href;if(navigator.clipboard){navigator.clipboard.writeText(u).then(function())};this.textContent='✅ 链接已复制';setTimeout(function(){document.querySelector('.buy-copy').textContent='📋 复制链接发给同事';},2000);">📋 复制链接发给同事</div>
+                </div>
+            </div>
+
+            <!-- 🌟 微信支付弹窗 -->
+            <style>
+                .modal-overlay{ display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,.55); z-index:9999; align-items:center; justify-content:center; animation:fadeIn .25s; }
+                .modal-box{ background:#fff; width:320px; max-width:90%; padding:30px 20px; border-radius:12px; box-shadow:0 8px 25px rgba(0,0,0,.2); text-align:center; position:relative; animation:slideUp .3s; }
+                .modal-title{ font-size:1.3rem; font-weight:bold; color:#2c3e50; margin-bottom:18px; }
+                .modal-qrcode{ width:200px; height:200px; margin:0 auto 12px; border:2px solid #f0f0f0; border-radius:8px; padding:8px; display:block; }
+                .modal-hint{ font-size:.9rem; color:#999; margin-top:12px; }
+                .modal-close{ position:absolute; top:10px; right:15px; font-size:1.6rem; color:#ccc; cursor:pointer; line-height:1; }
+                .modal-close:hover{ color:#666; }
+                @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+                @keyframes slideUp{ from{transform:translateY(30px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+            </style>
+            <div class="modal-overlay" id="purchase-modal" onclick="closeModal()">
+                <div class="modal-box" onclick="event.stopPropagation()">
+                    <span class="modal-close" onclick="closeModal()">&times;</span>
+                    <div class="modal-title">💳 微信扫码购买</div>
+                    <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81/5046c8071baec05fdc270f8aa31e93b5.jpg" alt="微信支付二维码" class="modal-qrcode">
+                    <div class="modal-hint">使用微信扫一扫完成支付，支付后联系客服开通下载权限</div>
+                </div>
+            </div>
+            <script>
+                function openModal(){ document.getElementById('purchase-modal').style.display='flex'; }
+                function closeModal(){ document.getElementById('purchase-modal').style.display='none'; }
+                document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+            </script>
+
+            <!-- ======================================================= -->
+            <!-- 🌟 新增：相关推荐（同分类下最新 6 篇） -->
+            <!-- ======================================================= -->
+            
+            
+            <div class="related-box">
+                <div class="related-title">📚 你可能还需要</div>
+                <div class="related-grid">
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/kecheng/大班音乐森林乐队视频教案PPT课件音乐简谱/ppt/20260220004530_ppt_cover_wm.jpg" alt="大班音乐森林乐队视频教案PPT课件音乐简谱" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/%E9%9F%B3%E4%B9%90/%E5%A4%A7%E7%8F%AD%E9%9F%B3%E4%B9%90%E6%A3%AE%E6%9E%97%E4%B9%90%E9%98%9F%E8%A7%86%E9%A2%91%E6%95%99%E6%A1%88PPT%E8%AF%BE%E4%BB%B6%E9%9F%B3%E4%B9%90%E7%AE%80%E8%B0%B1_%E5%A4%A7%E7%8F%AD.html">大班音乐森林乐队视频教案PPT课件音乐简谱</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/大班/doc_24/20260222212401_文稿_01.jpg" alt="大班益智区推进-叠叠高-4次" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/%E5%8C%BA%E5%9F%9F%E6%B8%B8%E6%88%8F%E6%8E%A8%E8%BF%9B/%E5%A4%A7%E7%8F%AD/%E5%A4%A7%E7%8F%AD%E7%9B%8A%E6%99%BA%E5%8C%BA%E6%8E%A8%E8%BF%9B-%E5%8F%A0%E5%8F%A0%E9%AB%98-4%E6%AC%A1.html">大班益智区推进-叠叠高-4次</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/kecheng/大班社会勇气视频教案PPT课件/ppt/20260220004256_ppt_cover_wm.jpg" alt="大班社会勇气视频教案PPT课件" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/%E7%A4%BE%E4%BC%9A/%E5%A4%A7%E7%8F%AD%E7%A4%BE%E4%BC%9A%E5%8B%87%E6%B0%94%E8%A7%86%E9%A2%91%E6%95%99%E6%A1%88PPT%E8%AF%BE%E4%BB%B6_%E5%A4%A7%E7%8F%AD.html">大班社会勇气视频教案PPT课件</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/banbenkecheng/【06】最新班本118套（持续更新中）/大班班本课程《我的身体》27页/ppt/20260219022651_ppt_cover_wm.jpg" alt="大班班本课程《我的身体》27页" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/%E7%8F%AD%E6%9C%AC%E8%AF%BE%E7%A8%8B/%E5%A4%A7%E7%8F%AD/%E5%A4%A7%E7%8F%AD%E7%8F%AD%E6%9C%AC%E8%AF%BE%E7%A8%8B%E3%80%8A%E6%88%91%E7%9A%84%E8%BA%AB%E4%BD%93%E3%80%8B27%E9%A1%B5.html">大班班本课程《我的身体》27页</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/banbenkecheng/【01】大中小班班本课程——120套（可编辑）/大班班本课程《石磨转转转》23页/ppt/20260219020855_ppt_cover_wm.jpg" alt="大班班本课程《石磨转转转》23页" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/%E7%8F%AD%E6%9C%AC%E8%AF%BE%E7%A8%8B/%E5%A4%A7%E7%8F%AD/%E5%A4%A7%E7%8F%AD%E7%8F%AD%E6%9C%AC%E8%AF%BE%E7%A8%8B%E3%80%8A%E7%9F%B3%E7%A3%A8%E8%BD%AC%E8%BD%AC%E8%BD%AC%E3%80%8B23%E9%A1%B5.html">大班班本课程《石磨转转转》23页</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/banbenkecheng/【01】大中小班班本课程——120套（可编辑）/大班班本课程《有趣的筷子》23页/ppt/20260219020831_ppt_cover_wm.jpg" alt="大班班本课程《有趣的筷子》23页" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/%E7%8F%AD%E6%9C%AC%E8%AF%BE%E7%A8%8B/%E5%A4%A7%E7%8F%AD/%E5%A4%A7%E7%8F%AD%E7%8F%AD%E6%9C%AC%E8%AF%BE%E7%A8%8B%E3%80%8A%E6%9C%89%E8%B6%A3%E7%9A%84%E7%AD%B7%E5%AD%90%E3%80%8B23%E9%A1%B5.html">大班班本课程《有趣的筷子》23页</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+
+            <!-- ======================================================= -->
+            <!-- 【区域二：底部导航返回栏 - 文章外部】 -->
+            <!-- ======================================================= -->
+            <div class="article-footer">
+                
+                
+                <a href="/" class="btn btn-back">返回课程列表</a>
+                <a href="/" class="btn btn-home">返回首页</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
+        </div>
+
+    <!-- 🌟 网站页脚 -->
+    <footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-copyright">
+            Copyright © 2026 搜课件网. All Rights Reserved
+        </div>
+        <div class="footer-notice">
+            申明：网站内容若涉及到版权侵权问题，请联系我们从网站删除
+        </div>
+        <!-- 🌟 网站运行时间统计 -->
+        <div class="site-runtime-container">
+            <span class="runtime-icon">⏳</span>
+            本站已安全运行：
+            <span id="site-runtime">计算中...</span>
+        </div>
+    </div>
+</footer>
+
+<!-- 🌟 运行时间JS（DOM加载后执行） -->
+    <script>
+        function updateRuntime() {
+            // 🔴【重要】请在这里修改您的建站日期（格式：年/月/日 时:分:秒）
+            var startTime = new Date('2026/10/07 00:00:00'); 
+            
+            // 获取当前时间
+            var now = new Date();
+            
+            // 计算时间差（毫秒）
+            var difference = now - startTime;
+            
+            // 计算天数、小时、分钟、秒
+            var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+            var minutes = Math.floor((difference / (1000 * 60)) % 60);
+            var seconds = Math.floor((difference / 1000) % 60);
+            
+            // 拼接字符串
+            var result = days + "天" + 
+                         hours + "小时" + 
+                         minutes + "分钟" + 
+                         seconds + "秒";
+            
+            // 更新网页显示
+            document.getElementById('site-runtime').innerHTML = result;
+        }
+
+        // 立即执行一次，避免加载时有延迟
+        updateRuntime();
+        
+        // 每隔 1 秒刷新一次
+        setInterval(updateRuntime, 1000);
+    </script>
+
+    <!-- 🌟 移动端体验补丁 B：返回时恢复滚动位置 + 回到顶部按钮 + 顶栏高度自适应 -->
+    <script>
+    (function () {
+        /* ---------- 1. 返回时恢复滚动位置（前进/新点击不恢复） ---------- */
+        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+        var KEY = 'yekjwScroll:' + location.pathname;
+
+        window.addEventListener('pagehide', function () {
+            try { sessionStorage.setItem(KEY, String(window.scrollY || 0)); } catch (e) {}
+        });
+
+        window.addEventListener('pageshow', function (e) {
+            if (e.persisted) return; /* bfcache 恢复，浏览器自己保留了位置 */
+            var isBack = false;
+            try {
+                var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+                isBack = !!nav && nav.type === 'back_forward';
+            } catch (err) {}
+            if (!isBack) return;
+            try {
+                var y = parseInt(sessionStorage.getItem(KEY) || '0', 10);
+                if (y > 0) {
+                    requestAnimationFrame(function () { window.scrollTo(0, y); });
+                }
+            } catch (err2) {}
+        });
+
+        /* ---------- 2. 回到顶部按钮（移动端专用，样式在 style.css 里） ---------- */
+        if (!document.querySelector('.yekjw-backtop')) {
+            var btn = document.createElement('button');
+            btn.className = 'yekjw-backtop';
+            btn.type = 'button';
+            btn.setAttribute('aria-label', '回到顶部');
+            btn.innerHTML = '&#8593;';
+            btn.addEventListener('click', function () {
+                if ('scrollBehavior' in document.documentElement.style) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    window.scrollTo(0, 0); /* 老 iOS Safari 兜底 */
+                }
+            });
+            var toggle = function () {
+                if (window.scrollY > window.innerHeight) { btn.classList.add('show'); }
+                else { btn.classList.remove('show'); }
+            };
+            window.addEventListener('scroll', toggle, { passive: true });
+            document.body.appendChild(btn);
+            toggle();
+        }
+
+        /* ---------- 3. 顶栏换行后实测高度，动态调整 body 顶部留空 ---------- */
+        function adjustHeaderSpace() {
+            var h = document.querySelector('.site-header');
+            if (!h) return;
+            if (window.innerWidth <= 768) {
+                document.body.style.paddingTop = (h.offsetHeight + 12) + 'px';
+            } else {
+                document.body.style.paddingTop = ''; /* 桌面端恢复原来的 110px */
+            }
+        }
+        window.addEventListener('resize', adjustHeaderSpace);
+        window.addEventListener('orientationchange', adjustHeaderSpace);
+        window.addEventListener('load', adjustHeaderSpace);
+        adjustHeaderSpace();
+        setTimeout(adjustHeaderSpace, 800); /* 延迟再校一次，确保布局稳定 */
+    })();
+    </script>
+</body>
+</html>
