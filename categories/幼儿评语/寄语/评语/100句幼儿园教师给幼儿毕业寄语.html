@@ -530,7 +530,7 @@
           box-shadow:0 4px 12px -4px rgba(108,99,255,.6);}
         .spot-top-name{font-size:.82rem;font-weight:800;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.75);
           white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-        .spot-idx{position:absolute;bottom:94px;left:32px;font-size:.82rem;font-weight:800;
+        .spot-idx{position:absolute;bottom:116px;left:32px;font-size:.82rem;font-weight:800;
           color:#8b94a8;font-family:ui-monospace,Menlo,monospace;letter-spacing:2px;z-index:5;}
         .spot-idx b{color:#fff;font-size:1.05rem;}
         .spot-strip{position:absolute;left:0;right:0;bottom:12px;display:flex;gap:6px;
@@ -544,7 +544,7 @@
         .spot-thumb.on{opacity:1;border-color:#6c63ff;transform:translateY(-2px);
           box-shadow:0 4px 12px -4px rgba(108,99,255,.5);}
         .spot-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-        .spot-nav{position:absolute;bottom:88px;right:26px;display:flex;gap:26px;z-index:8;}
+        .spot-nav{position:absolute;bottom:108px;right:26px;display:flex;gap:26px;z-index:8;}
         .spot-nav button{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.18);
           background:rgba(255,255,255,.08);color:#e8ecf5;font-size:1.15rem;cursor:pointer;
           display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);
@@ -553,7 +553,7 @@
           transform:scale(1.08);box-shadow:0 6px 22px -6px rgba(108,99,255,.7);}
         .spot-nav button:active{transform:scale(.96);}
         /* 底部居中标签（主展墙功能）：标题 + 序号/总数·分组 */
-        .spot-caption{position:absolute;bottom:94px;left:50%;transform:translateX(-50%);
+        .spot-caption{position:absolute;bottom:116px;left:50%;transform:translateX(-50%);
           text-align:center;color:#c9d2e3;z-index:6;pointer-events:none;max-width:86%;}
         .spot-caption .t{font-size:.92rem;font-weight:800;color:#fff;
           text-shadow:0 2px 8px rgba(0,0,0,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -564,6 +564,7 @@
           align-items:center;justify-content:center;padding:24px;}
         .lightbox.on{display:flex;}
         .lightbox img{max-width:96vw;max-height:94vh;object-fit:contain;background:#fff;border-radius:2px;
+          transform:translateZ(0);will-change:transform;backface-visibility:hidden;user-select:none;
           box-shadow:0 1px 0 rgba(255,255,255,.9) inset,
             0 6px 16px rgba(0,0,0,.12),0 24px 60px -18px rgba(30,42,59,.5),
             0 0 0 12px #fff,0 0 0 13px #d8dade,0 0 0 22px #fff,0 0 0 23px #e8e9ed;}
@@ -580,13 +581,13 @@
             .spot-topinfo{top:14px;left:14px;gap:6px;max-width:calc(100% - 28px);}
             .spot-top-tag{font-size:.6rem;padding:3px 9px;letter-spacing:1px;}
             .spot-top-name{font-size:.72rem;max-width:110px;}
-            .spot-idx{left:16px;bottom:78px;font-size:.72rem;}
+            .spot-idx{left:16px;bottom:98px;font-size:.72rem;}
             .spot-idx b{font-size:.95rem;}
             .spot-strip{bottom:6px;padding:6px 58px 4px;}
             .spot-thumb{width:44px;height:34px;}
-            .spot-nav{right:14px;bottom:72px;gap:16px;}
+            .spot-nav{right:14px;bottom:94px;gap:16px;}
             .spot-nav button{width:42px;height:42px;font-size:1rem;}
-            .spot-caption{bottom:80px;max-width:80%;}
+            .spot-caption{bottom:102px;max-width:80%;}
             .spot-caption .t{font-size:.82rem;}
             .spot-caption .s{font-size:.66rem;}
         }
