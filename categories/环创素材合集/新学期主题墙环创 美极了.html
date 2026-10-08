@@ -432,18 +432,21 @@
         /* ========== 相关推荐样式 ========== */
         .related-box { margin-top: 40px; padding-top: 30px; border-top: 1px solid #f0f0f0; }
         .related-title { font-size: 1.2rem; color: #2c3e50; margin-bottom: 18px; font-weight: bold; }
-        .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .related-item { background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; transition: 0.2s; }
-        .related-item:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform: translateY(-2px); }
-        .related-thumb { width: 100%; height: 120px; overflow: hidden; background: #f9f9f9; display: flex; align-items: center; justify-content: center; }
-        .related-thumb img { width: 100%; height: auto; max-height: 120px; object-fit: contain; }
-        .related-body { padding: 10px 12px; }
+        .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        @media(max-width:1024px){ .related-grid { grid-template-columns: repeat(3, 1fr); } }
+        .related-item { background: linear-gradient(180deg,#fff,#f8fafd); border: 1px solid #e2e8f2; border-radius: 10px; overflow: hidden; text-decoration: none; box-shadow: 0 3px 10px -8px rgba(30,42,59,.3); display: flex; flex-direction: column; transition: transform .18s, border-color .18s, box-shadow .18s; }
+        .related-item:hover { transform: translateY(-4px); border-color: #b3bde9; box-shadow: 0 12px 26px -18px rgba(79,70,229,.6); }
+        .related-thumb { width: 100%; height: 160px; overflow: hidden; background: #e9eef6; }
+        .related-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+        .related-item:hover .related-thumb img { transform: scale(1.06); }
+        .related-body { padding: 12px 14px 14px; }
         .related-body a {
-            font-size: 0.9rem; font-weight: bold; color: #2c3e50; line-height: 1.4;
+            font-size: 0.9rem; font-weight: bold; color: #1e2a3b; line-height: 1.5;
             text-decoration: none; overflow: hidden; display: -webkit-box;
             -webkit-line-clamp: 2; -webkit-box-orient: vertical;
         }
-        .related-body a:hover { color: #1890ff; }
+        .related-item:hover .related-body a { color: #4f46e5; }
+        @media(max-width:768px){ .related-thumb { height: 120px; } }
 
             /* ========== 手机端内容区域加宽 ========== */
     @media (max-width: 768px) {
@@ -498,6 +501,95 @@
                 -webkit-overflow-scrolling: touch;
             }
         }
+
+        /* ========== 🌟 聚光灯幻灯（正文图片展示，保留原风格） ========== */
+        .spot-stage{position:relative;height:700px;border-radius:14px;overflow:hidden;
+          background:radial-gradient(ellipse at 50% 50%,#1a1d26 0%,#06070a 85%);
+          display:flex;align-items:center;justify-content:center;margin-bottom:34px;}
+        .spot-stage::before{content:'';position:absolute;left:0;right:0;top:0;height:110px;
+          background:linear-gradient(180deg,rgba(0,0,0,.42),transparent);pointer-events:none;z-index:4;}
+        .spot-side{position:absolute;top:50%;transform:translateY(-50%);width:200px;height:340px;
+          object-fit:cover;border-radius:8px;opacity:.15;filter:blur(3px) brightness(.6);
+          transition:opacity .35s;pointer-events:none;border:1px solid rgba(255,255,255,.05);}
+        .spot-side.left{left:-100px;} .spot-side.right{right:-100px;}
+        .spot-main-wrap{position:relative;width:80%;max-width:820px;height:78%;
+          display:flex;align-items:center;justify-content:center;}
+        .spot-glow{position:absolute;inset:-10%;border-radius:24px;pointer-events:none;
+          background:radial-gradient(ellipse at 50% 50%,rgba(108,99,255,.22) 0%,transparent 65%);
+          animation:glow 5s ease-in-out infinite;z-index:1;}
+        @keyframes glow{0%,100%{opacity:.7;transform:scale(1);} 50%{opacity:1;transform:scale(1.05);}}
+        .spot-img{position:relative;z-index:2;max-width:100%;max-height:100%;object-fit:contain;
+          background:#fff;border-radius:8px;cursor:zoom-in;
+          box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.06),0 0 60px rgba(108,99,255,.15);
+          transition:opacity .3s,transform .3s;}
+        .spot-img:hover{transform:scale(1.008);} .spot-img.swap{opacity:0;}
+        .spot-topinfo{position:absolute;top:22px;left:28px;display:flex;align-items:center;gap:10px;
+          z-index:6;pointer-events:none;max-width:calc(100% - 56px);}
+        .spot-top-tag{font-size:.68rem;font-weight:800;letter-spacing:1.2px;background:rgba(108,99,255,.92);
+          color:#fff;padding:4px 12px;border-radius:12px;flex-shrink:0;white-space:nowrap;
+          box-shadow:0 4px 12px -4px rgba(108,99,255,.6);}
+        .spot-top-name{font-size:.82rem;font-weight:800;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.75);
+          white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        .spot-idx{position:absolute;bottom:94px;left:32px;font-size:.82rem;font-weight:800;
+          color:#8b94a8;font-family:ui-monospace,Menlo,monospace;letter-spacing:2px;z-index:5;}
+        .spot-idx b{color:#fff;font-size:1.05rem;}
+        .spot-strip{position:absolute;left:0;right:0;bottom:12px;display:flex;gap:6px;
+          padding:6px 96px 4px;overflow-x:auto;justify-content:flex-start;z-index:6;
+          scrollbar-width:thin;}
+        .spot-strip::-webkit-scrollbar{height:5px;}
+        .spot-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25);border-radius:3px;}
+        .spot-thumb{flex-shrink:0;width:52px;height:40px;border-radius:4px;overflow:hidden;
+          cursor:pointer;background:#fff;opacity:.55;border:2px solid transparent;transition:all .18s;}
+        .spot-thumb:hover{opacity:.9;}
+        .spot-thumb.on{opacity:1;border-color:#6c63ff;transform:translateY(-2px);
+          box-shadow:0 4px 12px -4px rgba(108,99,255,.5);}
+        .spot-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+        .spot-nav{position:absolute;bottom:88px;right:26px;display:flex;gap:26px;z-index:8;}
+        .spot-nav button{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.18);
+          background:rgba(255,255,255,.08);color:#e8ecf5;font-size:1.15rem;cursor:pointer;
+          display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);
+          box-shadow:0 4px 16px -6px rgba(0,0,0,.6);transition:all .18s;}
+        .spot-nav button:hover{background:rgba(255,255,255,.22);border-color:rgba(139,131,240,.6);
+          transform:scale(1.08);box-shadow:0 6px 22px -6px rgba(108,99,255,.7);}
+        .spot-nav button:active{transform:scale(.96);}
+        /* 底部居中标签（主展墙功能）：标题 + 序号/总数·分组 */
+        .spot-caption{position:absolute;bottom:94px;left:50%;transform:translateX(-50%);
+          text-align:center;color:#c9d2e3;z-index:6;pointer-events:none;max-width:86%;}
+        .spot-caption .t{font-size:.92rem;font-weight:800;color:#fff;
+          text-shadow:0 2px 8px rgba(0,0,0,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        .spot-caption .s{font-size:.74rem;color:#8b94a8;font-weight:700;letter-spacing:1.5px;margin-top:3px;}
+
+        /* 灯箱：只在当前屏幕放大图片本身（浅色背景，不带黑框） */
+        .lightbox{display:none;position:fixed;inset:0;background:#eef1f8;z-index:99999;
+          align-items:center;justify-content:center;padding:24px;}
+        .lightbox.on{display:flex;}
+        .lightbox img{max-width:96vw;max-height:94vh;object-fit:contain;background:#fff;border-radius:2px;
+          box-shadow:0 1px 0 rgba(255,255,255,.9) inset,
+            0 6px 16px rgba(0,0,0,.12),0 24px 60px -18px rgba(30,42,59,.5),
+            0 0 0 12px #fff,0 0 0 13px #d8dade,0 0 0 22px #fff,0 0 0 23px #e8e9ed;}
+        .lb-close{position:absolute;top:16px;right:20px;width:44px;height:44px;border-radius:50%;
+          border:none;background:rgba(30,42,59,.12);color:#42506a;font-size:1.5rem;
+          cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+        .lb-close:hover{background:rgba(30,42,59,.22);}
+        #postRaw{display:none;}
+
+        @media(max-width:900px){.spot-side{display:none;}}
+        @media(max-width:640px){
+            .spot-stage{height:540px;margin-bottom:24px;}
+            .spot-main-wrap{width:94%;height:76%;}
+            .spot-topinfo{top:14px;left:14px;gap:6px;max-width:calc(100% - 28px);}
+            .spot-top-tag{font-size:.6rem;padding:3px 9px;letter-spacing:1px;}
+            .spot-top-name{font-size:.72rem;max-width:110px;}
+            .spot-idx{left:16px;bottom:78px;font-size:.72rem;}
+            .spot-idx b{font-size:.95rem;}
+            .spot-strip{bottom:6px;padding:6px 58px 4px;}
+            .spot-thumb{width:44px;height:34px;}
+            .spot-nav{right:14px;bottom:72px;gap:16px;}
+            .spot-nav button{width:42px;height:42px;font-size:1rem;}
+            .spot-caption{bottom:80px;max-width:80%;}
+            .spot-caption .t{font-size:.82rem;}
+            .spot-caption .s{font-size:.66rem;}
+        }
     </style>
 </head>
 <body>
@@ -506,13 +598,7 @@
         <div class="post-card">
             <h1 class="post-title">新学期主题墙环创 美极了</h1>
             
-            <!-- 封面图显示区域 -->
-            
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/huanchuang/part_8960396d/part_dd7d536e/part_172e4d0b/grid_20260222134727_1.jpg" alt="封面图" class="post-cover">
-                </div>
-            
-            
+
             <div class="post-meta">
                 <span>📅 2016-02-18</span>
                 <span style="margin: 0 10px;">|</span>
@@ -523,7 +609,8 @@
             <div class="article-content">
                 
 
-                <div class="article-header">
+                <!-- 原始正文（隐藏，仅用于抽取图片与标题） -->
+                <div id="postRaw" data-cover="https://yekjw.oss-cn-qingdao.aliyuncs.com/huanchuang/part_8960396d/part_dd7d536e/part_172e4d0b/grid_20260222134727_1.jpg"><div class="article-header">
 <h1>新学期主题墙环创 美极了</h1>
 <div class="article-meta">
 <span class="subject">📚 分类：环创素材合集</span>
@@ -559,7 +646,129 @@
 <div class="img-container">
 <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/huanchuang/part_8960396d/part_dd7d536e/part_172e4d0b/grid_20260222134727_6.jpg" alt="素材预览图6" class="rounded shadow">
 </div>
+</div>
 
+                <!-- 聚光灯舞台 -->
+                <div class="spot-stage" id="spotStage">
+                    <img class="spot-side left" id="spotL" src="" alt="">
+                    <img class="spot-side right" id="spotR" src="" alt="">
+                    <div class="spot-main-wrap">
+                        <div class="spot-glow"></div>
+                        <img class="spot-img" id="spotImg" src="" alt="">
+                    </div>
+                    <div class="spot-topinfo">
+                        <span class="spot-top-tag" id="spotTopTag">—</span>
+                        <span class="spot-top-name" id="spotTopName">—</span>
+                    </div>
+                    <div class="spot-idx"><b id="spotN">01</b> / <span id="spotTotal">0</span></div>
+                    <div class="spot-caption">
+                        <div class="t" id="spotT">—</div>
+                        <div class="s" id="spotS">—</div>
+                    </div>
+                    <div class="spot-strip" id="spotStrip"></div>
+                    <div class="spot-nav">
+                        <button id="spotPrev" aria-label="上一张">‹</button>
+                        <button id="spotNext" aria-label="下一张">›</button>
+                    </div>
+                </div>
+
+                <!-- 灯箱 -->
+                <div class="lightbox" id="lightbox">
+                    <button class="lb-close" id="lbCloseBtn">×</button>
+                    <img id="lbImg" src="" alt="">
+                </div>
+
+                <script>
+                (function(){
+                    var raw = document.getElementById('postRaw');
+                    var rawImgs = raw ? raw.querySelectorAll('img') : [];
+                    var ITEMS = [];
+                    for (var i = 0; i < rawImgs.length; i++) {
+                        var src = rawImgs[i].getAttribute('src') || '';
+                        if (!src) continue;
+                        var cur = rawImgs[i]; var title = '';
+                        while (cur) {
+                            cur = cur.previousElementSibling;
+                            if (!cur) break;
+                            var t = cur.querySelector('.section-title, .sub-title, h3, h2, .ppt-name, .doc-title');
+                            if (t && t.textContent.trim()) { title = t.textContent.replace(/\s+/g,' ').trim(); break; }
+                            if (cur.tagName === 'IMG') break;
+                        }
+                        ITEMS.push({ img: src, title: title });
+                    }
+                    var cover = raw ? (raw.getAttribute('data-cover') || '') : '';
+                    if (cover) {
+                        var exists = -1;
+                        for (var k = 0; k < ITEMS.length; k++) { if (ITEMS[k].img === cover) { exists = k; break; } }
+                        if (exists >= 0) { var hit = ITEMS.splice(exists, 1)[0]; ITEMS.unshift(hit); }
+                        else { ITEMS.unshift({ img: cover, title: '封面页' }); }
+                    }
+                    if (ITEMS[0] && !ITEMS[0].title) ITEMS[0].title = '封面页';
+                    for (var m = 0; m < ITEMS.length; m++) {
+                        if (!ITEMS[m].title) {
+                            if (ITEMS[m].img.indexOf('tree') >= 0) ITEMS[m].title = '课件文件结构';
+                            else ITEMS[m].title = '课件内容 · 第 ' + (m+1) + ' 张';
+                        }
+                    }
+                    var N = ITEMS.length;
+                    document.getElementById('spotTotal').textContent = N;
+                    if (N === 0) { document.getElementById('spotStage').style.display = 'none'; return; }
+
+                    var lbEl = document.getElementById('lightbox');
+                    var lbImg = document.getElementById('lbImg');
+                    function lbOpen(src){ lbImg.src = src; lbEl.classList.add('on'); }
+                    function lbClose(){ lbEl.classList.remove('on'); }
+                    lbEl.addEventListener('click', function(e){ if (e.target === lbEl) lbClose(); });
+                    document.getElementById('lbCloseBtn').addEventListener('click', lbClose);
+                    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') lbClose(); });
+
+                    var img = document.getElementById('spotImg');
+                    var sideL = document.getElementById('spotL');
+                    var sideR = document.getElementById('spotR');
+                    var nEl = document.getElementById('spotN');
+                    var topTag = document.getElementById('spotTopTag');
+                    var topName = document.getElementById('spotTopName');
+                    var tEl = document.getElementById('spotT');
+                    var sEl = document.getElementById('spotS');
+                    var strip = document.getElementById('spotStrip');
+                    var prev = document.getElementById('spotPrev');
+                    var next = document.getElementById('spotNext');
+                    var cur = 0;
+
+                    ITEMS.forEach(function(it, i){
+                        var th = document.createElement('div');
+                        th.className = 'spot-thumb';
+                        th.dataset.i = i; th.title = it.title;
+                        th.innerHTML = '<img src="' + it.img + '" loading="lazy" alt="">';
+                        th.addEventListener('click', function(e){ e.stopPropagation(); go(i); });
+                        strip.appendChild(th);
+                    });
+                    var thumbs = strip.querySelectorAll('.spot-thumb');
+
+                    function go(i){
+                        i = (i % N + N) % N; cur = i;
+                        img.classList.add('swap');
+                        setTimeout(function(){ img.src = ITEMS[i].img; img.classList.remove('swap'); }, 200);
+                        var li = (i - 1 + N) % N, ri = (i + 1) % N;
+                        sideL.src = ITEMS[li].img; sideR.src = ITEMS[ri].img;
+                        topTag.textContent = i === 0 ? '封面' : '课件内容';
+                        topName.textContent = ITEMS[i].title;
+                        nEl.textContent = String(i + 1).padStart(2, '0');
+                        tEl.textContent = ITEMS[i].title;
+                        sEl.textContent = String(i + 1).padStart(2, '0') + ' / ' + N + '  ·  ' + (i === 0 ? '封面' : '课件内容');
+                        thumbs.forEach(function(th, k){ th.classList.toggle('on', k === i); });
+                    }
+                    img.addEventListener('click', function(e){ e.stopPropagation(); lbOpen(ITEMS[cur].img); });
+                    prev.addEventListener('click', function(e){ e.stopPropagation(); go(cur - 1); });
+                    next.addEventListener('click', function(e){ e.stopPropagation(); go(cur + 1); });
+                    document.addEventListener('keydown', function(e){
+                        if (lbEl.classList.contains('on')) return;
+                        if (e.key === 'ArrowLeft') go(cur - 1);
+                        if (e.key === 'ArrowRight') go(cur + 1);
+                    });
+                    go(0);
+                })();
+                </script>
             </div>
 
             <!-- ======================================================= -->
@@ -612,37 +821,49 @@
                     </table>
                     <div class="buy-btns">
                         <a href="/vip-member/" class="buy-btn buy-btn--vip">👑 开通VIP会员（全站免费）</a>
-                        <a href="javascript:void(0)" onclick="openModal()" class="buy-btn buy-btn--single">🛒 单篇购买（4.99元）</a>
+                        <div class="buy-single-wrap">
+                            <a href="javascript:void(0)" onclick="toggleQr(event)" class="buy-btn buy-btn--single">🛒 单篇购买（4.99元）</a>
+                            <div class="qr-pop" id="qrPop" onclick="event.stopPropagation()">
+                                <button class="qr-close" onclick="closeQr(event)">&times;</button>
+                                <div class="qr-title">💳 微信扫码购买</div>
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81/5046c8071baec05fdc270f8aa31e93b5.jpg" alt="微信支付二维码" class="qr-img">
+                                <div class="qr-hint">微信扫一扫完成支付，支付后联系客服开通下载权限</div>
+                            </div>
+                        </div>
                     </div>
                     <p class="buy-note">* VIP会员永久免下载券，单次购买永久有效</p>
                     <div class="buy-copy" onclick="var u=location.href;if(navigator.clipboard){navigator.clipboard.writeText(u).then(function())};this.textContent='✅ 链接已复制';setTimeout(function(){document.querySelector('.buy-copy').textContent='📋 复制链接发给同事';},2000);">📋 复制链接发给同事</div>
                 </div>
             </div>
 
-            <!-- 🌟 微信支付弹窗 -->
+            <!-- 🌟 单篇购买：在当前按钮位置弹出二维码 -->
             <style>
-                .modal-overlay{ display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,.55); z-index:9999; align-items:center; justify-content:center; animation:fadeIn .25s; }
-                .modal-box{ background:#fff; width:320px; max-width:90%; padding:30px 20px; border-radius:12px; box-shadow:0 8px 25px rgba(0,0,0,.2); text-align:center; position:relative; animation:slideUp .3s; }
-                .modal-title{ font-size:1.3rem; font-weight:bold; color:#2c3e50; margin-bottom:18px; }
-                .modal-qrcode{ width:200px; height:200px; margin:0 auto 12px; border:2px solid #f0f0f0; border-radius:8px; padding:8px; display:block; }
-                .modal-hint{ font-size:.9rem; color:#999; margin-top:12px; }
-                .modal-close{ position:absolute; top:10px; right:15px; font-size:1.6rem; color:#ccc; cursor:pointer; line-height:1; }
-                .modal-close:hover{ color:#666; }
-                @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
-                @keyframes slideUp{ from{transform:translateY(30px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+                .buy-single-wrap{ position:relative; flex:1; min-width:180px; display:flex; }
+                .buy-single-wrap .buy-btn{ flex:1; width:100%; }
+                .qr-pop{ display:none; position:absolute; bottom:calc(100% + 12px); left:50%; transform:translateX(-50%);
+                  width:250px; max-width:88vw; background:#fff; border-radius:12px; text-align:center;
+                  padding:16px 14px 14px; box-shadow:0 14px 40px rgba(30,42,59,.35); z-index:70; }
+                .qr-pop.on{ display:block; animation:popIn .18s; }
+                @keyframes popIn{ from{opacity:0; transform:translateX(-50%) translateY(8px);} to{opacity:1; transform:translateX(-50%) translateY(0);} }
+                .qr-title{ font-size:.95rem; font-weight:800; color:#2c3e50; margin-bottom:10px; }
+                .qr-img{ width:170px; height:170px; margin:0 auto 8px; border:2px solid #f0f0f0; border-radius:8px; padding:6px; display:block; }
+                .qr-hint{ font-size:.72rem; color:#999; line-height:1.6; }
+                .qr-close{ position:absolute; top:6px; right:10px; font-size:1.3rem; color:#ccc; cursor:pointer; line-height:1; border:none; background:none; }
+                .qr-close:hover{ color:#666; }
+                @media(max-width:768px){ .buy-single-wrap{ width:100%; } .qr-pop{ bottom:calc(100% + 8px); } }
             </style>
-            <div class="modal-overlay" id="purchase-modal" onclick="closeModal()">
-                <div class="modal-box" onclick="event.stopPropagation()">
-                    <span class="modal-close" onclick="closeModal()">&times;</span>
-                    <div class="modal-title">💳 微信扫码购买</div>
-                    <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81/5046c8071baec05fdc270f8aa31e93b5.jpg" alt="微信支付二维码" class="modal-qrcode">
-                    <div class="modal-hint">使用微信扫一扫完成支付，支付后联系客服开通下载权限</div>
-                </div>
-            </div>
             <script>
-                function openModal(){ document.getElementById('purchase-modal').style.display='flex'; }
-                function closeModal(){ document.getElementById('purchase-modal').style.display='none'; }
-                document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+                function toggleQr(e){
+                    e.stopPropagation();
+                    var p = document.getElementById('qrPop');
+                    var wasOpen = p.classList.contains('on');
+                    document.querySelectorAll('.qr-pop.on').forEach(function(x){ x.classList.remove('on'); });
+                    if (!wasOpen) p.classList.add('on');
+                }
+                function closeQr(e){ if(e) e.stopPropagation(); document.getElementById('qrPop').classList.remove('on'); }
+                document.addEventListener('click', function(e){
+                    if (!e.target.closest('.buy-single-wrap')) closeQr();
+                });
             </script>
 
             <!-- ======================================================= -->
@@ -717,6 +938,28 @@
                         </div>
                         <div class="related-body">
                             <a href="/categories/%E7%8E%AF%E5%88%9B%E7%B4%A0%E6%9D%90%E5%90%88%E9%9B%86/%E4%B8%96%E7%95%8C%E6%B0%94%E8%B1%A1%E6%97%A5.html">世界气象日</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/huanchuang/part_8960396d/part_dd7d536e/4_1/grid_20260222134708_1.jpg" alt="抠图素材4 (1)" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/%E7%8E%AF%E5%88%9B%E7%B4%A0%E6%9D%90%E5%90%88%E9%9B%86/%E6%8A%A0%E5%9B%BE%E7%B4%A0%E6%9D%904%20(1).html">抠图素材4 (1)</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/huanchuang/part_8960396d/part_dd7d536e/part_dc44e9e5/grid_20260222133926_1.jpg" alt="布的世界主题墙" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/%E7%8E%AF%E5%88%9B%E7%B4%A0%E6%9D%90%E5%90%88%E9%9B%86/%E5%B8%83%E7%9A%84%E4%B8%96%E7%95%8C%E4%B8%BB%E9%A2%98%E5%A2%99.html">布的世界主题墙</a>
                         </div>
                     </div>
                     
