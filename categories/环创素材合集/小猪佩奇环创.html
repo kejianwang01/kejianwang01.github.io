@@ -560,11 +560,10 @@
         .spot-caption .s{font-size:.74rem;color:#8b94a8;font-weight:700;letter-spacing:1.5px;margin-top:3px;}
 
         /* 灯箱：只在当前屏幕放大图片本身（浅色背景，不带黑框） */
-        .lightbox{display:none;position:fixed;inset:0;background:rgba(6,8,14,.96);
+        .lightbox{display:none;position:fixed;inset:0;background:rgba(8,10,16,1);
           z-index:99999;align-items:center;justify-content:center;padding:20px;}
         .lightbox.on{display:flex;}
         .lightbox img{max-width:96vw;max-height:92vh;border-radius:6px;object-fit:contain;
-          transform:translateZ(0);will-change:transform;backface-visibility:hidden;user-select:none;
           box-shadow:0 20px 70px rgba(0,0,0,.7);}
         .lb-close{position:absolute;top:16px;right:20px;width:44px;height:44px;border-radius:50%;
           border:none;background:rgba(255,255,255,.14);color:#fff;font-size:1.6rem;
@@ -727,6 +726,8 @@
 
                     var lbEl = document.getElementById('lightbox');
                     var lbImg = document.getElementById('lbImg');
+                    /* 挂到 body 顶层，避免 post-card 的 transform/overflow 使 fixed 失效导致只盖住卡片、位置偏移、闪屏 */
+                    if (lbEl && document.body) { document.body.appendChild(lbEl); }
                     function lbOpen(src){ lbImg.src = src; lbEl.classList.add('on'); }
                     function lbClose(){ lbEl.classList.remove('on'); }
                     lbEl.addEventListener('click', function(e){ if (e.target === lbEl) lbClose(); });
