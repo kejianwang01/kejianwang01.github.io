@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路灯亮了 语言社会 中班 - 搜课件网</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* 主体内容 */
+        body { 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            background-color: #f4f6f8; 
+            color: #333; 
+            margin: 0; 
+            padding: 0; 
+            padding-top: 110px; /* 顶部留空，防止被固定头部遮挡 */
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        /* 顶部导航 - 🔥 强制蓝色背景 */
+        .site-header { 
+            background-color: #2c3e50 !important; /* 强制深蓝色 */
+            color: #fff !important;              /* 强制白色文字 */
+            padding: 10px 0; 
+            margin-bottom: 30px;
+            position: fixed;      
+            top: 0;
+            left: 0;
+            width: 100%;          
+            z-index: 9999;         /* 强制最高层级 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+        
+        .header-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* 标题样式 */
+        .logo { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+        .logo a { 
+            color: #fff !important;  /* 强制白色 */
+            text-decoration: none; 
+            font-size: 1.8rem; 
+            font-weight: bold; 
+        }
+        .site-slogan {
+            font-size: 0.9rem;       
+            color: #bdc3c7;          
+            margin-top: 2px;          
+            margin-left: 2px;         
+            font-weight: normal;
+        }
+
+        /* 按钮样式 */
+        .header-buttons a { 
+            color: #ecf0f1 !important; /* 强制浅灰白 */
+            text-decoration: none; 
+            margin-left: 20px; 
+            font-size: 0.9rem; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            padding: 5px 12px; 
+            border-radius: 4px; 
+        }
+
+        /* 搜索按钮 */
+        .header-buttons .search-btn {
+            background-color: #3498db !important;
+            color: #fff !important;
+        }
+        .header-buttons .search-btn:hover {
+            background-color: #2980b9 !important;
+        }
+
+
+        /* 🌟 顶部四个班级课程卡片（参考图设计：彩色大圆角卡片 + 半透明胶囊子标签） */
+        .top-boxes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-bottom: 40px; }
+        .big-box {
+            position: relative;
+            border-radius: 20px;
+            padding: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(44, 62, 80, 0.18);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .big-box:hover { transform: translateY(-5px); box-shadow: 0 18px 32px -8px rgba(44, 62, 80, 0.3); }
+        .big-box:active { transform: translateY(-1px); }
+        /* 四张卡片各自的配色：小班橙 / 中班青 / 大班蓝 / 其他紫 */
+        .course-xiaoban  { background: linear-gradient(135deg, #ffb199 0%, #ff8f70 100%); }
+        .course-zhongban { background: linear-gradient(135deg, #5fc9bd 0%, #35b3a4 100%); }
+        .course-daban    { background: linear-gradient(135deg, #7ec3f8 0%, #55a8f0 100%); }
+        .course-qita     { background: linear-gradient(135deg, #b39ddb 0%, #9575cd 100%); }
+        /* 卡片右上角大号半透明装饰 emoji（模仿参考图卡片里的大图标） */
+        .course-deco {
+            position: absolute;
+            right: -8px;
+            top: -12px;
+            font-size: 5rem;
+            line-height: 1;
+            opacity: 0.22;
+            pointer-events: none;
+            user-select: none;
+            filter: saturate(1.2);
+        }
+        /* 卡片头部：emoji 图标块 + 标题 + 副标题 */
+        .box-head { display: flex; align-items: center; gap: 13px; margin-bottom: 16px; position: relative; z-index: 1; }
+        .box-emoji {
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 14px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+        }
+        .box-title { font-size: 1.35rem; font-weight: bold; color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); }
+        .box-sub { font-size: 0.82rem; color: rgba(255, 255, 255, 0.92); margin-top: 3px; }
+        /* 子分类：半透明白色胶囊标签（毛玻璃质感） */
+        .box-content { display: flex; flex-wrap: wrap; gap: 9px; position: relative; z-index: 1; }
+        .box-link {
+            text-decoration: none;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            padding: 8px 15px;
+            border-radius: 999px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .box-link:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
+        }
+        .box-link:active { transform: translateY(0); background: rgba(255, 255, 255, 0.42); }
+
+        /* 筛选按钮行 */
+        .filter-section { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 30px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
+        .filter-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .filter-btn { padding: 8px 20px; background: #ecf0f1; border: none; border-radius: 20px; cursor: pointer; font-size: 1rem; color: #555; transition: 0.3s; }
+        .filter-btn:hover { background: #bdc3c7; }
+        .filter-btn.active { background: #e67e22; color: #fff; font-weight: bold; box-shadow: 0 4px 6px rgba(230, 126, 34, 0.3); }
+
+        /* 底部动态课件列表 */
+        .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 0 10px; }
+        .list-title { margin: 0; color: #2c3e50; }
+        
+        .posts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media (max-width: 1024px) { .posts-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 768px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .post-card { background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; transition: 0.2s; display: flex; flex-direction: column; }
+        .post-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        
+        /* 图片区域样式 */
+        .card-img-wrapper { width: 100%; height: 180px; overflow: hidden; background: #f9f9f9; display: flex; align-items: center; justify-content: center; }
+        .card-img-wrapper img { width: 100%; height: auto; max-height: 180px; object-fit: contain; transition: transform 0.5s; }
+        .post-card:hover .card-img-wrapper img { transform: scale(1.1); }
+
+        .card-body { padding: 15px; flex: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1rem; font-weight: bold; margin-bottom: 10px; color: #2c3e50; line-height: 1.4; flex: 1; }
+        .card-title a { text-decoration: none; color: inherit; }
+        .card-meta { font-size: 0.8rem; color: #999; margin-top: auto; display: flex; justify-content: space-between; }
+        
+        /* 分页 */
+        .pagination { margin-top: 30px; text-align: center; }
+        .page-btn { padding: 10px 20px; background: #34495e; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; margin: 0 10px; }
+        .page-btn:disabled { background: #ccc; cursor: not-allowed; }
+        .page-info { font-size: 1rem; margin: 0 15px; color: #555; vertical-align: middle; }
+
+        /* 广告轮播图样式 */
+        .ad-slider-container {
+            position: relative;
+            margin-top: -30px;  /* 🌟 向上拉回 */
+            margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: 100%; 
+        }
+        .ad-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain; 
+        }
+        .ad-slide { display: none; width: 100%; }
+        .fade { animation-name: fade; animation-duration: 1.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+
+        /* 手机端优化 */
+        @media (max-width: 768px) {
+            .header-content { padding: 0 10px; }
+            .header-buttons a { margin-top: 10px !important; font-size: 0.8rem; padding: 4px 8px; margin-left: 8px; white-space: nowrap; }
+            .ad-slider-container { margin-top: 10px !important; /* 🌟 改成 10px，继续往下调整 */border-radius: 0; margin-left: -20px; margin-right: -20px; width: calc(100% + 40px); }
+            .ad-img { height: auto !important; width: 100%; }
+            .top-boxes-grid { grid-template-columns: 1fr; gap: 15px; }
+            .big-box { padding: 18px; }
+            .box-emoji { width: 44px; height: 44px; font-size: 1.4rem; border-radius: 12px; }
+            .box-title { font-size: 1.15rem; }
+            .box-sub { font-size: 0.76rem; }
+            .course-deco { font-size: 4rem; }
+            .box-content { gap: 8px; }
+            .box-link {
+                flex: 1 1 calc(50% - 4px);          /* 手机端一行两个，铺满宽度更好按 */
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                min-height: 44px;                   /* 44px 触摸标准 */
+                padding: 8px 6px;
+                font-size: 0.88rem;
+                box-sizing: border-box;
+            }
+            .filter-section { padding: 15px; text-align: left; overflow-x: auto; white-space: nowrap; }
+            .filter-bar { display: flex; gap: 8px; width: max-content; }
+            .posts-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .card-img-wrapper { height: 140px; }
+        }
+        @media (max-width: 480px) {
+            .card-title { font-size: 0.85rem; }
+            .card-img-wrapper { height: 120px; }
+        }
+
+        /* ========== 🌟 全局强力调整页面间距 (修正位置：移到了 style 标签里面) ========== */
+
+        /* 1. 修复首页筛选后的列表位置（大中小班分类列表） */
+        .list-header {
+            margin-top: 0 !important; /* 🔥 加大到 120px，强行推下去 */
+        }
+
+        /* 2. 修复“点击查看更多资源”页面的位置（这是一个独立页面） */
+        .page-title, 
+        h1, 
+        .archive-title {
+            margin-top: 100px !important; /* 🔥 针对资源页和文章页的标题增加上边距 */
+            display: block;
+        }
+
+        /* 3. 保险起见，给资源页的主要内容区也增加一点距离 */
+        .page-content,
+        .article-content {
+            margin-top: 50px !important;
+        }
+            /* ========== 🌟 强制页脚居中样式 (新增) ========== */
+    .site-footer {
+        width: 100%; /* 确保占满全屏宽度 */
+        text-align: center; /* 🌟 核心：强制内部所有文字和元素居中 */
+        background-color: #2c3e50; /* 深蓝背景 */
+        color: #ecf0f1; /* 浅灰文字 */
+        padding: 40px 0; /* 上下留白 */
+        margin-top: 60px; /* 距离上方内容 */
+        display: block; /* 确保是块级显示 */
+        border-top: 3px solid #3498db; /* 顶部蓝线 */
+    }
+
+    .footer-content {
+        max-width: 1200px; /* 内容最大宽度 */
+        margin: 0 auto; /* 🌟 核心：确保内容块在屏幕中间 */
+        padding: 0 20px; /* 左右留空 */
+    }
+
+    /* 链接样式 */
+    .footer-content a {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .footer-content a:hover {
+        color: #5dade2;
+        text-decoration: underline;
+    }
+
+    /* 手机端适配 */
+    @media (max-width: 768px) {
+        .site-footer { padding: 30px 0; }
+    }
+    /* 运行时间样式 */
+.site-runtime-container {
+    text-align: left; /* 左对齐 */
+    font-size: 0.9rem;   /* 字体大小 */
+    color: #bdc3c7;      /* 浅灰白色 */
+    margin: 5px 0;       /* 上下间距 */
+}
+.runtime-icon { margin-right: 5px; }
+
+        /* ============================================================
+           🌟 移动端优化补丁 A（仅手机端生效，桌面端不受影响）
+           ============================================================ */
+        @media (max-width: 768px) {
+            /* ---- 1. 顶栏统一：按钮改为 flex 流式排布，间距一致，不再东挤西挤 ---- */
+            .header-content {
+                flex-wrap: wrap;
+                row-gap: 8px;
+                padding: 0 12px;
+            }
+            .logo a { font-size: 1.3rem; }
+            .site-slogan { font-size: 0.75rem; }
+            .header-buttons {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 6px;
+                width: 100%;
+                margin-left: 0;
+            }
+            .header-buttons a {
+                margin: 0 !important;          /* 覆盖 margin-left:20px / 15px / 8px */
+                margin-top: 0 !important;      /* 覆盖旧规则的 10px 顶推 */
+                font-size: 0.82rem;
+                padding: 7px 10px;
+                white-space: nowrap;
+            }
+
+            /* ---- 2. 收敛第 153~172 行的全局顶推（手机端首屏不再空 150px） ---- */
+            h1, .page-title, .archive-title { margin-top: 8px !important; }
+            .page-content, .article-content { margin-top: 0 !important; }
+
+            /* ---- 3. 通用触控目标 ≥ 44px（分页按钮） ---- */
+            .page-btn { min-height: 44px; box-sizing: border-box; }
+        }
+        @media (max-width: 480px) {
+            .header-buttons a { font-size: 0.78rem; padding: 6px 8px; }
+            .header-buttons { gap: 5px; }
+        }
+    </style>
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+    <!-- 调用头部 -->
+    <header class="site-header">
+    <div class="header-content">
+        <div class="logo">
+            <a href="/">搜课件网</a>
+            <span class="site-slogan">专业、系统、有趣的教学资源</span>
+        </div>
+        <div class="header-buttons">
+            <a href="/">🏠 首页</a>
+            <a href="/about" style="margin-left: 15px;">关于本站</a>
+            <a href="/contact">联系我</a>
+            <a href="/login/" style="margin-left:15px;background-color:#f39c3d;color:#fff !important;border-color:#f39c3d;">🔐 登录</a>
+        </div>
+    </div>
+</header>
+
+
+    <!-- 页面内容 -->
+    <div class="container">
+        <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路灯亮了 语言社会 中班 - 搜课件网</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* ========== 全局基础样式 ========== */
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f6f8; color: #333; margin: 0; }
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+
+        /* 文章卡片样式 */
+        .post-card { background: #fff; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        
+        /* 标题和元数据 */
+        .post-title { text-align: center; font-size: 2.2rem; color: #2c3e50; margin-bottom: 10px; }
+        .post-meta { text-align: center; color: #95a5a6; font-size: 0.9rem; margin-bottom: 30px; }
+
+        /* 封面图样式 */
+        .post-cover { width: 100%; height: auto; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: block; object-fit: contain; }
+
+        /* ========== 🌟 终极修复：解决 h1 标题距离上方过远的问题 ========== */
+
+        /* 1. 关键修复：强制取消 layout.ejs 中 h1 的 100px 上边距 */
+        /* 这个规则会覆盖全局样式，只影响文章卡片内的 h1 */
+        .post-card h1 {
+            margin-top: 0 !important;     /* 🔥 强制覆盖 layout.ejs 的 100px */
+            margin-bottom: 15px !important; /* 标题下方的间距 */
+        }
+
+        /* 2. 微调：减小日期/浏览量的底部边距 */
+        .post-card .post-meta {
+            margin-bottom: 15px !important;
+        }
+
+        /* 3. 紧凑内容区域 */
+        .post-card .article-content {
+            margin-top: 5px !important; /* 进一步缩小，因为 h1 已经处理好了 */
+        }
+
+        /* 4. 针对 ceshi7.py 生成的 article-header */
+        .article-header {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* 5. 调整分隔线 */
+        .divider {
+            margin: 10px 0 !important;
+        }
+
+        /* ========== 🌟 核心修复一：文章宽度加宽 (1300px) ========== */
+        article, .post-content, .article-entry, .markdown-body, 
+        #content, .content, main, .entry-content, .post, .post-main, .article, .article-wrapper,
+        .container.main-container {
+            max-width: 1300px !important;
+            width: 100% !important;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* 确保图片正常显示 */
+        article img, .post-content img, .article-entry img, 
+        .markdown-body img, #content img, .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 底部导航区域样式 */
+        .article-footer { margin-top: 40px; padding-top: 30px; border-top: 1px dashed #e8e8e8; text-align: center; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .article-footer .btn { display: inline-block; min-width: 150px; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-size: 1rem; font-weight: 500; transition: all 0.3s ease; }
+        .btn-back { background-color: #e6f7ff; color: #0050b3; border: 1px solid #91d5ff; }
+        .btn-back:hover { background-color: #bae7ff; color: #003a8c; border-color: #40a9ff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(24, 144, 255, 0.2); }
+        .btn-home { background-color: #fff7e6; color: #d46b08; border: 1px solid #ffd591; }
+        .btn-home:hover { background-color: #ffe7ba; color: #ad4e00; border-color: #ffa940; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(250, 219, 20, 0.2); }
+
+        /* ========== 相关推荐样式 ========== */
+        .related-box { margin-top: 40px; padding-top: 30px; border-top: 1px solid #f0f0f0; }
+        .related-title { font-size: 1.2rem; color: #2c3e50; margin-bottom: 18px; font-weight: bold; }
+        .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        @media(max-width:1024px){ .related-grid { grid-template-columns: repeat(3, 1fr); } }
+        .related-item { background: linear-gradient(180deg,#fff,#f8fafd); border: 1px solid #e2e8f2; border-radius: 10px; overflow: hidden; text-decoration: none; box-shadow: 0 3px 10px -8px rgba(30,42,59,.3); display: flex; flex-direction: column; transition: transform .18s, border-color .18s, box-shadow .18s; }
+        .related-item:hover { transform: translateY(-4px); border-color: #b3bde9; box-shadow: 0 12px 26px -18px rgba(79,70,229,.6); }
+        .related-thumb { width: 100%; height: 160px; overflow: hidden; background: #e9eef6; }
+        .related-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+        .related-item:hover .related-thumb img { transform: scale(1.06); }
+        .related-body { padding: 12px 14px 14px; }
+        .related-body a {
+            font-size: 0.9rem; font-weight: bold; color: #1e2a3b; line-height: 1.5;
+            text-decoration: none; overflow: hidden; display: -webkit-box;
+            -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+        }
+        .related-item:hover .related-body a { color: #4f46e5; }
+        @media(max-width:768px){ .related-thumb { height: 120px; } }
+
+            /* ========== 手机端内容区域加宽 ========== */
+    @media (max-width: 768px) {
+        /* 🌟 文章卡片内边距缩小：从 40px 减小到 10px，内容瞬间变宽 */
+        .post-card {
+            padding: 20px 10px !important;
+        }
+        /* 手机端相关推荐改为 2 列，避免太窄 */
+        .related-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+    }
+
+        /* ============================================================
+           🌟 移动端优化补丁 C（仅手机端生效，桌面端不受影响）
+           ============================================================ */
+        @media (max-width: 768px) {
+            /* ---- 1. 正文占宽：逐层消除左右留白 ---- */
+            .container { padding: 0 10px !important; margin: 16px auto !important; }
+            .post-card { padding: 16px 8px !important; }
+            /* 消掉 style.css 第 219~237 行加的 20px 内边距（选择器一一对应） */
+            .post-card article, .post-card .post-content, .post-card .article-entry,
+            .post-card .markdown-body, .post-card .content, .post-card #content,
+            .post-card .post, .post-card .post-body, .post-card .entry-content,
+            .post-card .post-main, .post-card .article-content, .post-card .article-header {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                max-width: 100% !important;
+            }
+
+            /* ---- 2. 标题与元信息收敛 ---- */
+            .post-title { font-size: 1.45rem; line-height: 1.45; }
+            .post-meta { margin-bottom: 14px !important; }
+            .post-cover { margin-bottom: 16px; }
+
+            /* ---- 3. 页脚按钮（只改间距字号，不动结构） ---- */
+            .article-footer { margin-top: 24px; padding-top: 18px; }
+            .article-footer .btn { min-width: 120px; padding: 10px 14px; font-size: 0.9rem; }
+
+            /* ---- 4. 相关推荐：强制 2 列（问题 7 兜底） ---- */
+            .related-box { margin-top: 24px; padding-top: 18px; }
+            .related-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+            .related-body { padding: 8px; }
+
+            /* ---- 5. 正文里的图片/表格不撑破屏幕，表格可横向滑动 ---- */
+            .article-content img, .article-content video,
+            .article-content table, .post-content table { max-width: 100% !important; }
+            .article-content table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* ========== 🌟 聚光灯幻灯（正文图片展示，保留原风格） ========== */
+        .spot-stage{position:relative;height:700px;border-radius:14px;overflow:hidden;
+          background:radial-gradient(ellipse at 50% 50%,#1a1d26 0%,#06070a 85%);
+          display:flex;align-items:center;justify-content:center;margin-bottom:34px;}
+        .spot-stage::before{content:'';position:absolute;left:0;right:0;top:0;height:110px;
+          background:linear-gradient(180deg,rgba(0,0,0,.42),transparent);pointer-events:none;z-index:4;}
+        .spot-side{position:absolute;top:50%;transform:translateY(-50%);width:200px;height:340px;
+          object-fit:cover;border-radius:8px;opacity:.15;filter:blur(3px) brightness(.6);
+          transition:opacity .35s;pointer-events:none;border:1px solid rgba(255,255,255,.05);}
+        .spot-side.left{left:-100px;} .spot-side.right{right:-100px;}
+        .spot-main-wrap{position:relative;width:80%;max-width:820px;height:78%;
+          display:flex;align-items:center;justify-content:center;}
+        .spot-glow{position:absolute;inset:-10%;border-radius:24px;pointer-events:none;
+          background:radial-gradient(ellipse at 50% 50%,rgba(108,99,255,.22) 0%,transparent 65%);
+          animation:glow 5s ease-in-out infinite;z-index:1;}
+        @keyframes glow{0%,100%{opacity:.7;transform:scale(1);} 50%{opacity:1;transform:scale(1.05);}}
+        .spot-img{position:relative;z-index:2;max-width:100%;max-height:100%;object-fit:contain;
+          background:#fff;border-radius:8px;cursor:zoom-in;
+          box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.06),0 0 60px rgba(108,99,255,.15);
+          transition:opacity .3s,transform .3s;}
+        .spot-img:hover{transform:scale(1.008);} .spot-img.swap{opacity:0;}
+        .spot-topinfo{position:absolute;top:22px;left:28px;display:flex;align-items:center;gap:10px;
+          z-index:6;pointer-events:none;max-width:calc(100% - 56px);}
+        .spot-top-tag{font-size:.68rem;font-weight:800;letter-spacing:1.2px;background:rgba(108,99,255,.92);
+          color:#fff;padding:4px 12px;border-radius:12px;flex-shrink:0;white-space:nowrap;
+          box-shadow:0 4px 12px -4px rgba(108,99,255,.6);}
+        .spot-top-name{font-size:.82rem;font-weight:800;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.75);
+          white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        .spot-idx{position:absolute;bottom:116px;left:32px;font-size:.82rem;font-weight:800;
+          color:#8b94a8;font-family:ui-monospace,Menlo,monospace;letter-spacing:2px;z-index:5;}
+        .spot-idx b{color:#fff;font-size:1.05rem;}
+        .spot-strip{position:absolute;left:0;right:0;bottom:12px;display:flex;gap:6px;
+          padding:6px 96px 4px;overflow-x:auto;justify-content:flex-start;z-index:6;
+          scrollbar-width:thin;}
+        .spot-strip::-webkit-scrollbar{height:5px;}
+        .spot-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25);border-radius:3px;}
+        .spot-thumb{flex-shrink:0;width:52px;height:40px;border-radius:4px;overflow:hidden;
+          cursor:pointer;background:#fff;opacity:.55;border:2px solid transparent;transition:all .18s;}
+        .spot-thumb:hover{opacity:.9;}
+        .spot-thumb.on{opacity:1;border-color:#6c63ff;transform:translateY(-2px);
+          box-shadow:0 4px 12px -4px rgba(108,99,255,.5);}
+        .spot-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+        .spot-nav{position:absolute;bottom:108px;right:26px;display:flex;gap:26px;z-index:8;}
+        .spot-nav button{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.18);
+          background:rgba(255,255,255,.08);color:#e8ecf5;font-size:1.15rem;cursor:pointer;
+          display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);
+          box-shadow:0 4px 16px -6px rgba(0,0,0,.6);transition:all .18s;}
+        .spot-nav button:hover{background:rgba(255,255,255,.22);border-color:rgba(139,131,240,.6);
+          transform:scale(1.08);box-shadow:0 6px 22px -6px rgba(108,99,255,.7);}
+        .spot-nav button:active{transform:scale(.96);}
+        /* 底部居中标签（主展墙功能）：标题 + 序号/总数·分组 */
+        .spot-caption{position:absolute;bottom:116px;left:50%;transform:translateX(-50%);
+          text-align:center;color:#c9d2e3;z-index:6;pointer-events:none;max-width:86%;}
+        .spot-caption .t{font-size:.92rem;font-weight:800;color:#fff;
+          text-shadow:0 2px 8px rgba(0,0,0,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        .spot-caption .s{font-size:.74rem;color:#8b94a8;font-weight:700;letter-spacing:1.5px;margin-top:3px;}
+
+        /* 灯箱：只在当前屏幕放大图片本身（浅色背景，不带黑框） */
+        .lightbox{display:none;position:fixed;inset:0;background:rgba(8,10,16,1);
+          z-index:99999;align-items:center;justify-content:center;padding:20px;}
+        .lightbox.on{display:flex;}
+        .lightbox img{max-width:96vw;max-height:92vh;border-radius:6px;object-fit:contain;
+          box-shadow:0 20px 70px rgba(0,0,0,.7);}
+        .lb-close{position:absolute;top:16px;right:20px;width:44px;height:44px;border-radius:50%;
+          border:none;background:rgba(255,255,255,.14);color:#fff;font-size:1.6rem;
+          cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+        .lb-close:hover{background:rgba(255,255,255,.28);}
+        #postRaw{display:none;}
+
+        @media(max-width:900px){.spot-side{display:none;}}
+        @media(max-width:640px){
+            .spot-stage{height:540px;margin-bottom:24px;}
+            .spot-main-wrap{width:94%;height:76%;}
+            .spot-topinfo{top:14px;left:14px;gap:6px;max-width:calc(100% - 28px);}
+            .spot-top-tag{font-size:.6rem;padding:3px 9px;letter-spacing:1px;}
+            .spot-top-name{font-size:.72rem;max-width:110px;}
+            .spot-idx{left:16px;bottom:98px;font-size:.72rem;}
+            .spot-idx b{font-size:.95rem;}
+            .spot-strip{bottom:6px;padding:6px 58px 4px;}
+            .spot-thumb{width:44px;height:34px;}
+            .spot-nav{right:14px;bottom:94px;gap:16px;}
+            .spot-nav button{width:42px;height:42px;font-size:1rem;}
+            .spot-caption{bottom:102px;max-width:80%;}
+            .spot-caption .t{font-size:.82rem;}
+            .spot-caption .s{font-size:.66rem;}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="post-card">
+            <h1 class="post-title">路灯亮了 语言社会 中班</h1>
+            
+
+            <div class="post-meta">
+                <span>📅 2026-02-02</span>
+                <span style="margin: 0 10px;">|</span>
+                <span>👁 11944 次浏览</span>
+            </div>
+
+            <!-- 🌟 正文内容区域 -->
+            <div class="article-content">
+                
+
+                <!-- 原始正文（隐藏，仅用于抽取图片与标题） -->
+                <div id="postRaw" data-cover="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/ludengliangle_yuyanshehui_zhongban/ppt/ppt_cover_wm.jpg"><div class="article-header">
+
+<h1>路灯亮了 语言社会 中班</h1>
+
+<div class="article-meta">
+
+<p><span class="subject">📚 科目：语言</span></p>
+<p><span class="age">👶 年龄：中班</span></p>
+<p><span class="views">🔥 热度：11944</span></p>
+</div>
+
+</div>
+
+
+<hr class="divider">
+
+
+<div class="section-container">
+
+<div class="section-title">📂 课件完整文件结构</div>
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/ludengliangle_yuyanshehui_zhongban/tree/folder_tree.jpg" alt="文件结构图" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+<div class="section-container thumbnail-section">
+
+<div class="section-title">📊 PPT整体缩览图</div>
+
+<div class="ppt-title">📄 路灯亮了_语言社会_中班_课件.pptx</div>
+
+<div class="ppt-thumbnail-container">
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/ludengliangle_yuyanshehui_zhongban/ppt_thumbnail/ppt_thumbnail.jpg" alt="PPT整体缩览图" class="rounded shadow">
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-container ppt-section">
+
+<div class="section-title">📽️ PPT课件预览</div>
+
+<div class="ppt-cover-container">
+
+<div class="cover-label">🎨 PPT封面页</div>
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/ludengliangle_yuyanshehui_zhongban/ppt/ppt_cover_wm.jpg" alt="PPT封面" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+<div class="ppt-content-pages">
+
+<div class="content-label">📑 PPT内容页</div>
+
+<div class="grid-group">
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/ludengliangle_yuyanshehui_zhongban/ppt_grid/ppt_grid_1.jpg" alt="PPT内容页" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="section-container teaching-section">
+
+<div class="section-title">📝 教案与发言稿</div>
+
+<div class="word-file-container">
+
+<div class="word-title">📄 路灯亮了_语言社会_中班_教案.doc（共2页）</div>
+
+<div class="teaching-plan-page">
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/ludengliangle_yuyanshehui_zhongban/teaching_plan/w0_教案_01.jpg" alt="教案内容" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+<div class="teaching-plan-page">
+
+<div class="img-container img-single center">
+
+<img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/ludengliangle_yuyanshehui_zhongban/teaching_plan/w0_教案_02.jpg" alt="教案内容" class="rounded shadow">
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+                <!-- 聚光灯舞台 -->
+                <div class="spot-stage" id="spotStage">
+                    <img class="spot-side left" id="spotL" src="" alt="">
+                    <img class="spot-side right" id="spotR" src="" alt="">
+                    <div class="spot-main-wrap">
+                        <div class="spot-glow"></div>
+                        <img class="spot-img" id="spotImg" src="" alt="">
+                    </div>
+                    <div class="spot-topinfo">
+                        <span class="spot-top-tag" id="spotTopTag">—</span>
+                        <span class="spot-top-name" id="spotTopName">—</span>
+                    </div>
+                    <div class="spot-idx"><b id="spotN">01</b> / <span id="spotTotal">0</span></div>
+                    <div class="spot-caption">
+                        <div class="t" id="spotT">—</div>
+                        <div class="s" id="spotS">—</div>
+                    </div>
+                    <div class="spot-strip" id="spotStrip"></div>
+                    <div class="spot-nav">
+                        <button id="spotPrev" aria-label="上一张">‹</button>
+                        <button id="spotNext" aria-label="下一张">›</button>
+                    </div>
+                </div>
+
+                <!-- 灯箱 -->
+                <div class="lightbox" id="lightbox">
+                    <button class="lb-close" id="lbCloseBtn">×</button>
+                    <img id="lbImg" src="" alt="">
+                </div>
+
+                <script>
+                (function(){
+                    var raw = document.getElementById('postRaw');
+                    var rawImgs = raw ? raw.querySelectorAll('img') : [];
+                    var ITEMS = [];
+                    for (var i = 0; i < rawImgs.length; i++) {
+                        var src = rawImgs[i].getAttribute('src') || '';
+                        if (!src) continue;
+                        var cur = rawImgs[i]; var title = '';
+                        while (cur) {
+                            cur = cur.previousElementSibling;
+                            if (!cur) break;
+                            var t = cur.querySelector('.section-title, .sub-title, h3, h2, .ppt-name, .doc-title');
+                            if (t && t.textContent.trim()) { title = t.textContent.replace(/\s+/g,' ').trim(); break; }
+                            if (cur.tagName === 'IMG') break;
+                        }
+                        ITEMS.push({ img: src, title: title });
+                    }
+                    var cover = raw ? (raw.getAttribute('data-cover') || '') : '';
+                    if (cover) {
+                        var exists = -1;
+                        for (var k = 0; k < ITEMS.length; k++) { if (ITEMS[k].img === cover) { exists = k; break; } }
+                        if (exists >= 0) { var hit = ITEMS.splice(exists, 1)[0]; ITEMS.unshift(hit); }
+                        else { ITEMS.unshift({ img: cover, title: '封面页' }); }
+                    }
+                    if (ITEMS[0] && !ITEMS[0].title) ITEMS[0].title = '封面页';
+                    for (var m = 0; m < ITEMS.length; m++) {
+                        if (!ITEMS[m].title) {
+                            if (ITEMS[m].img.indexOf('tree') >= 0) ITEMS[m].title = '课件文件结构';
+                            else ITEMS[m].title = '课件内容 · 第 ' + (m+1) + ' 张';
+                        }
+                    }
+                    var N = ITEMS.length;
+                    document.getElementById('spotTotal').textContent = N;
+                    if (N === 0) { document.getElementById('spotStage').style.display = 'none'; return; }
+
+                    var lbEl = document.getElementById('lightbox');
+                    var lbImg = document.getElementById('lbImg');
+                    /* 挂到 body 顶层，避免 post-card 的 transform/overflow 使 fixed 失效导致只盖住卡片、位置偏移、闪屏 */
+                    if (lbEl && document.body) { document.body.appendChild(lbEl); }
+                    function lbOpen(src){ lbImg.src = src; lbEl.classList.add('on'); }
+                    function lbClose(){ lbEl.classList.remove('on'); }
+                    lbEl.addEventListener('click', function(e){ if (e.target === lbEl) lbClose(); });
+                    document.getElementById('lbCloseBtn').addEventListener('click', lbClose);
+                    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') lbClose(); });
+
+                    var img = document.getElementById('spotImg');
+                    var sideL = document.getElementById('spotL');
+                    var sideR = document.getElementById('spotR');
+                    var nEl = document.getElementById('spotN');
+                    var topTag = document.getElementById('spotTopTag');
+                    var topName = document.getElementById('spotTopName');
+                    var tEl = document.getElementById('spotT');
+                    var sEl = document.getElementById('spotS');
+                    var strip = document.getElementById('spotStrip');
+                    var prev = document.getElementById('spotPrev');
+                    var next = document.getElementById('spotNext');
+                    var cur = 0;
+
+                    ITEMS.forEach(function(it, i){
+                        var th = document.createElement('div');
+                        th.className = 'spot-thumb';
+                        th.dataset.i = i; th.title = it.title;
+                        th.innerHTML = '<img src="' + it.img + '" loading="lazy" alt="">';
+                        th.addEventListener('click', function(e){ e.stopPropagation(); go(i); });
+                        strip.appendChild(th);
+                    });
+                    var thumbs = strip.querySelectorAll('.spot-thumb');
+
+                    function go(i){
+                        i = (i % N + N) % N; cur = i;
+                        img.classList.add('swap');
+                        setTimeout(function(){ img.src = ITEMS[i].img; img.classList.remove('swap'); }, 200);
+                        var li = (i - 1 + N) % N, ri = (i + 1) % N;
+                        sideL.src = ITEMS[li].img; sideR.src = ITEMS[ri].img;
+                        topTag.textContent = i === 0 ? '封面' : '课件内容';
+                        topName.textContent = ITEMS[i].title;
+                        nEl.textContent = String(i + 1).padStart(2, '0');
+                        tEl.textContent = ITEMS[i].title;
+                        sEl.textContent = String(i + 1).padStart(2, '0') + ' / ' + N + '  ·  ' + (i === 0 ? '封面' : '课件内容');
+                        thumbs.forEach(function(th, k){ th.classList.toggle('on', k === i); });
+                    }
+                    img.addEventListener('click', function(e){ e.stopPropagation(); lbOpen(ITEMS[cur].img); });
+                    prev.addEventListener('click', function(e){ e.stopPropagation(); go(cur - 1); });
+                    next.addEventListener('click', function(e){ e.stopPropagation(); go(cur + 1); });
+                    document.addEventListener('keydown', function(e){
+                        if (lbEl.classList.contains('on')) return;
+                        if (e.key === 'ArrowLeft') go(cur - 1);
+                        if (e.key === 'ArrowRight') go(cur + 1);
+                    });
+                    go(0);
+                })();
+                </script>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- 🌟 购买 / VIP 说明区块 -->
+            <!-- ======================================================= -->
+            <style>
+                .buy-box{ margin-top:36px; border-radius:14px; overflow:hidden; border:1px solid #e2e8f2; background:linear-gradient(180deg,#fff,#f6f8ff); box-shadow:0 8px 24px -16px rgba(79,70,229,.4); }
+                .buy-box__head{ padding:20px 24px; background:linear-gradient(135deg,#6c63ff,#4f46e5); color:#fff; }
+                .buy-box__head h3{ margin:0 0 6px; font-size:1.2rem; font-weight:800; }
+                .buy-box__head p{ margin:0; font-size:.88rem; opacity:.9; }
+                .buy-box__body{ padding:22px 24px; }
+                .buy-table{ width:100%; border-collapse:collapse; margin-bottom:20px; font-size:.9rem; }
+                .buy-table th{ background:#eef1ff; color:#3a2fc7; font-weight:800; padding:10px 12px; text-align:left; border:1px solid #dde3fd; }
+                .buy-table td{ padding:10px 12px; border:1px solid #e8ecf4; color:#42506a; }
+                .buy-table tr:hover td{ background:#f6f8ff; }
+                .buy-table .price{ font-weight:800; color:#e67e22; }
+                .buy-table .hl{ background:#fff7e6; }
+                .buy-btns{ display:flex; gap:14px; flex-wrap:wrap; }
+                .buy-btn{ flex:1; min-width:180px; padding:14px 20px; border-radius:10px; text-align:center; text-decoration:none; font-weight:800; font-size:.95rem; transition:transform .15s, box-shadow .15s; }
+                .buy-btn--vip{ color:#fff; background:linear-gradient(180deg,#f39c3d,#e67e22); box-shadow:0 4px 0 #b35c10, 0 10px 20px -10px rgba(230,126,34,.6); }
+                .buy-btn--single{ color:#fff; background:linear-gradient(180deg,#6c63ff,#4f46e5); box-shadow:0 4px 0 #3a2fc7, 0 10px 20px -10px rgba(79,70,229,.6); }
+                .buy-btn:hover{ transform:translateY(-2px); filter:brightness(1.06); }
+                .buy-btn:active{ transform:translateY(2px); box-shadow:0 1px 0 rgba(0,0,0,.3); }
+                .buy-note{ margin-top:16px; font-size:.8rem; color:#93a1b3; line-height:1.7; }
+                .buy-copy{ display:inline-flex; align-items:center; gap:6px; margin-top:10px; padding:8px 16px; font-size:.82rem; font-weight:700; color:#4f46e5; background:#eef1ff; border:1px solid #dde3fd; border-radius:8px; cursor:pointer; transition:all .15s; }
+                .buy-copy:hover{ background:#e6eaff; border-color:#b3bde9; }
+                @media (max-width:768px){
+                    .buy-box__body{ padding:16px 14px; }
+                    .buy-table{ font-size:.78rem; }
+                    .buy-table th, .buy-table td{ padding:8px 6px; }
+                    .buy-btns{ flex-direction:column; }
+                }
+            </style>
+            <div class="buy-box">
+                <div class="buy-box__head">
+                    <h3>📥 获取本课完整资源</h3>
+                    <p>包含高清PPT课件 + 详细教案 + 配套素材</p>
+                </div>
+                <div class="buy-box__body">
+                    <table class="buy-table">
+                        <thead>
+                            <tr><th>档位</th><th>时长</th><th>权益</th><th>价格</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>体验卡</td><td>7 天</td><td>全部栏目 + 10 次下载</td><td class="price">9.9 元</td></tr>
+                            <tr><td>月卡</td><td>30 天</td><td>全部栏目 + 50 次</td><td class="price">29.9 元</td></tr>
+                            <tr><td>年卡</td><td>365 天</td><td>全部栏目 + 300 次</td><td class="price">59.9 元</td></tr>
+                            <tr class="hl"><td>终身卡</td><td>终身</td><td>无限次下载 / 每日限 8 次</td><td class="price">199 元</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="buy-btns">
+                        <a href="/vip-member/" class="buy-btn buy-btn--vip">👑 开通VIP会员（全站免费）</a>
+                        <div class="buy-single-wrap">
+                            <a href="javascript:void(0)" onclick="toggleQr(event)" class="buy-btn buy-btn--single">🛒 单篇购买（4.99元）</a>
+                            <div class="qr-pop" id="qrPop" onclick="event.stopPropagation()">
+                                <button class="qr-close" onclick="closeQr(event)">&times;</button>
+                                <div class="qr-title">💳 微信扫码购买</div>
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81/5046c8071baec05fdc270f8aa31e93b5.jpg" alt="微信支付二维码" class="qr-img">
+                                <div class="qr-hint">微信扫一扫完成支付，支付后联系客服开通下载权限</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="buy-note">* VIP会员永久免下载券，单次购买永久有效</p>
+                    <div class="buy-copy" onclick="var u=location.href;if(navigator.clipboard){navigator.clipboard.writeText(u).then(function())};this.textContent='✅ 链接已复制';setTimeout(function(){document.querySelector('.buy-copy').textContent='📋 复制链接发给同事';},2000);">📋 复制链接发给同事</div>
+                </div>
+            </div>
+
+            <!-- 🌟 单篇购买：在当前按钮位置弹出二维码 -->
+            <style>
+                .buy-single-wrap{ position:relative; flex:1; min-width:180px; display:flex; }
+                .buy-single-wrap .buy-btn{ flex:1; width:100%; }
+                .qr-pop{ display:none; position:absolute; bottom:calc(100% + 12px); left:50%; transform:translateX(-50%);
+                  width:250px; max-width:88vw; background:#fff; border-radius:12px; text-align:center;
+                  padding:16px 14px 14px; box-shadow:0 14px 40px rgba(30,42,59,.35); z-index:70; }
+                .qr-pop.on{ display:block; animation:popIn .18s; }
+                @keyframes popIn{ from{opacity:0; transform:translateX(-50%) translateY(8px);} to{opacity:1; transform:translateX(-50%) translateY(0);} }
+                .qr-title{ font-size:.95rem; font-weight:800; color:#2c3e50; margin-bottom:10px; }
+                .qr-img{ width:170px; height:170px; margin:0 auto 8px; border:2px solid #f0f0f0; border-radius:8px; padding:6px; display:block; }
+                .qr-hint{ font-size:.72rem; color:#999; line-height:1.6; }
+                .qr-close{ position:absolute; top:6px; right:10px; font-size:1.3rem; color:#ccc; cursor:pointer; line-height:1; border:none; background:none; }
+                .qr-close:hover{ color:#666; }
+                @media(max-width:768px){ .buy-single-wrap{ width:100%; } .qr-pop{ bottom:calc(100% + 8px); } }
+            </style>
+            <script>
+                function toggleQr(e){
+                    e.stopPropagation();
+                    var p = document.getElementById('qrPop');
+                    var wasOpen = p.classList.contains('on');
+                    document.querySelectorAll('.qr-pop.on').forEach(function(x){ x.classList.remove('on'); });
+                    if (!wasOpen) p.classList.add('on');
+                }
+                function closeQr(e){ if(e) e.stopPropagation(); document.getElementById('qrPop').classList.remove('on'); }
+                document.addEventListener('click', function(e){
+                    if (!e.target.closest('.buy-single-wrap')) closeQr();
+                });
+            </script>
+
+            <!-- ======================================================= -->
+            <!-- 🌟 新增：相关推荐（同分类下最新 6 篇） -->
+            <!-- ======================================================= -->
+            
+            
+            <div class="related-box">
+                <div class="related-title">📚 你可能还需要</div>
+                <div class="related-grid">
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/feng_yuyan_zhongban/ppt/ppt_cover_wm.jpg" alt="风 语言 中班" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/yuyan/feng_yuyan_zhongban.html">风 语言 中班</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/houbobiyibi_shuxue_zhongban/ppt/ppt_cover_wm.jpg" alt="厚薄比一比 数学 中班" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/shuxue/houbobiyibi_shuxue_zhongban.html">厚薄比一比 数学 中班</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/bingqilin_meishu_zhongban/ppt/ppt_cover_wm.jpg" alt="冰淇淋 美术 中班" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/meishu/bingqilin_meishu_zhongban.html">冰淇淋 美术 中班</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/huibiandeyueliang_yuyanmeishu_daban/ppt/ppt_cover_wm.jpg" alt="会变的月亮 语言美术 大班" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/yuyan/huibiandeyueliang_yuyanmeishu_daban.html">会变的月亮 语言美术 大班</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/changwanxiatian_kualingyutanjiuhuodong_zhongban_yuyan_zhongban/ppt/ppt_cover_wm.jpg" alt="畅玩夏天_跨领域探究活动_中班 语言 中班" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/yuyan/changwanxiatian_kualingyutanjiuhuodong_zhongban_yuyan_zhongban.html">畅玩夏天_跨领域探究活动_中班 语言 中班</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/fengzainali_kexueyuyan_daban/ppt/ppt_cover_wm.jpg" alt="风在哪里 科学语言 大班" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/yuyan/fengzainali_kexueyuyan_daban.html">风在哪里 科学语言 大班</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/reredexiatian_tanjiuhuodong_xiaoban_yuyan_xiaoban/ppt/ppt_cover_wm.jpg" alt="热热的夏天_探究活动_小班 语言 小班" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/yuyan/reredexiatian_tanjiuhuodong_xiaoban_yuyan_xiaoban.html">热热的夏天_探究活动_小班 语言 小班</a>
+                        </div>
+                    </div>
+                    
+                    <div class="related-item">
+                        <div class="related-thumb">
+                            
+                                <img src="https://yekjw.oss-cn-qingdao.aliyuncs.com/blog_images/lijiaoqiao_kexueyuyan_daban/ppt/ppt_cover_wm.jpg" alt="立交桥 科学语言 大班" loading="lazy">
+                            
+                        </div>
+                        <div class="related-body">
+                            <a href="/categories/yuyan/lijiaoqiao_kexueyuyan_daban.html">立交桥 科学语言 大班</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+
+            <!-- ======================================================= -->
+            <!-- 【区域二：底部导航返回栏 - 文章外部】 -->
+            <!-- ======================================================= -->
+            <div class="article-footer">
+                
+                
+                <a href="/categories/语言/中班/" class="btn btn-back">返回 中班语言 列表</a>
+                <a href="/" class="btn btn-home">返回首页</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
+        </div>
+
+    <!-- 🌟 网站页脚 -->
+    <footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-copyright">
+            Copyright © 2026 搜课件网. All Rights Reserved
+        </div>
+        <div class="footer-notice">
+            申明：网站内容若涉及到版权侵权问题，请联系我们从网站删除
+        </div>
+        <!-- 🌟 网站运行时间统计 -->
+        <div class="site-runtime-container">
+            <span class="runtime-icon">⏳</span>
+            本站已安全运行：
+            <span id="site-runtime">计算中...</span>
+        </div>
+    </div>
+</footer>
+
+<!-- 🌟 运行时间JS（DOM加载后执行） -->
+    <script>
+        function updateRuntime() {
+            // 🔴【重要】请在这里修改您的建站日期（格式：年/月/日 时:分:秒）
+            var startTime = new Date('2026/10/07 00:00:00'); 
+            
+            // 获取当前时间
+            var now = new Date();
+            
+            // 计算时间差（毫秒）
+            var difference = now - startTime;
+            
+            // 计算天数、小时、分钟、秒
+            var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+            var minutes = Math.floor((difference / (1000 * 60)) % 60);
+            var seconds = Math.floor((difference / 1000) % 60);
+            
+            // 拼接字符串
+            var result = days + "天" + 
+                         hours + "小时" + 
+                         minutes + "分钟" + 
+                         seconds + "秒";
+            
+            // 更新网页显示
+            document.getElementById('site-runtime').innerHTML = result;
+        }
+
+        // 立即执行一次，避免加载时有延迟
+        updateRuntime();
+        
+        // 每隔 1 秒刷新一次
+        setInterval(updateRuntime, 1000);
+    </script>
+
+    <!-- 🌟 移动端体验补丁 B：返回时恢复滚动位置 + 回到顶部按钮 + 顶栏高度自适应 -->
+    <script>
+    (function () {
+        /* ---------- 1. 返回时恢复滚动位置（前进/新点击不恢复） ---------- */
+        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+        var KEY = 'yekjwScroll:' + location.pathname;
+
+        window.addEventListener('pagehide', function () {
+            try { sessionStorage.setItem(KEY, String(window.scrollY || 0)); } catch (e) {}
+        });
+
+        window.addEventListener('pageshow', function (e) {
+            if (e.persisted) return; /* bfcache 恢复，浏览器自己保留了位置 */
+            var isBack = false;
+            try {
+                var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+                isBack = !!nav && nav.type === 'back_forward';
+            } catch (err) {}
+            if (!isBack) return;
+            try {
+                var y = parseInt(sessionStorage.getItem(KEY) || '0', 10);
+                if (y > 0) {
+                    requestAnimationFrame(function () { window.scrollTo(0, y); });
+                }
+            } catch (err2) {}
+        });
+
+        /* ---------- 2. 回到顶部按钮（移动端专用，样式在 style.css 里） ---------- */
+        if (!document.querySelector('.yekjw-backtop')) {
+            var btn = document.createElement('button');
+            btn.className = 'yekjw-backtop';
+            btn.type = 'button';
+            btn.setAttribute('aria-label', '回到顶部');
+            btn.innerHTML = '&#8593;';
+            btn.addEventListener('click', function () {
+                if ('scrollBehavior' in document.documentElement.style) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    window.scrollTo(0, 0); /* 老 iOS Safari 兜底 */
+                }
+            });
+            var toggle = function () {
+                if (window.scrollY > window.innerHeight) { btn.classList.add('show'); }
+                else { btn.classList.remove('show'); }
+            };
+            window.addEventListener('scroll', toggle, { passive: true });
+            document.body.appendChild(btn);
+            toggle();
+        }
+
+        /* ---------- 3. 顶栏换行后实测高度，动态调整 body 顶部留空 ---------- */
+        function adjustHeaderSpace() {
+            var h = document.querySelector('.site-header');
+            if (!h) return;
+            if (window.innerWidth <= 768) {
+                document.body.style.paddingTop = (h.offsetHeight + 12) + 'px';
+            } else {
+                document.body.style.paddingTop = ''; /* 桌面端恢复原来的 110px */
+            }
+        }
+        window.addEventListener('resize', adjustHeaderSpace);
+        window.addEventListener('orientationchange', adjustHeaderSpace);
+        window.addEventListener('load', adjustHeaderSpace);
+        adjustHeaderSpace();
+        setTimeout(adjustHeaderSpace, 800); /* 延迟再校一次，确保布局稳定 */
+    })();
+    </script>
+</body>
+</html>
